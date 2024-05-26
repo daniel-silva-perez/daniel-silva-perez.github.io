@@ -1,4 +1,4 @@
-document.querySelector('.pageclip-form').addEventListener('submit', function (e) {
+document.querySelector('.pageclip-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
     let form = e.target;
@@ -9,13 +9,16 @@ document.querySelector('.pageclip-form').addEventListener('submit', function (e)
         body: new FormData(form)
     })
         .then(response => {
-            if (response.ok) {
-                alert('Form submitted successfully!');
-            } else {
-                throw new Error('Form submission failed');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
+            return response;
+        })
+        .then(response => {
+            alert('Form submitted successfully!');
         })
         .catch(error => {
-            alert(error);
+            console.error('There has been a problem with your fetch operation:', error);
+            alert('There has been a problem with your fetch operation, see console for more details.');
         });
 });
