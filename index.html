@@ -5,6 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Daniel Silva's Portfolio</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://s.pageclip.co/v1/pageclip.css" media="screen" rel="stylesheet">
     <link href="css/loading-bar.css" rel="stylesheet">
     <script src="css/loading-bar.js" type="text/javascript"></script>
 </head>
@@ -78,7 +79,6 @@
     </div>
 </section>
 
-<!-- Add a section for skills -->
 <section class="bg-light py-5" id="skills">
     <div class="container">
         <h2 class="text-center mb-4">Skills</h2>
@@ -114,6 +114,13 @@
             <div class="col-md-2 text-center">
                 <div class="card bg-light mb-4">
                     <div class="card-body">
+                        <h5 class="card-title">JUnit</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
                         <h5 class="card-title">C++</h5>
                     </div>
                 </div>
@@ -142,20 +149,23 @@
         <h2 class="text-center mb-4">Contact</h2>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form>
+                <form action="https://send.pageclip.co/jZqDG8Yzwr9PUa81PUq3xTWOKmIjmXcR" class="pageclip-form"
+                      method="post">
                     <div class="mb-3">
                         <label class="form-label" for="name">Name</label>
-                        <input class="form-control" id="name" required type="text">
+                        <input class="form-control" id="name" name="name" required type="text">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="email">Email</label>
-                        <input class="form-control" id="email" required type="email">
+                        <input class="form-control" id="email" name="email" required type="email">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="message">Message</label>
-                        <textarea class="form-control" id="message" required rows="3"></textarea>
+                        <textarea class="form-control" id="message" name="message" required rows="3"></textarea>
                     </div>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="pageclip-form__submit btn btn-primary" type="submit">
+                        <span>Submit</span>
+                    </button>
                 </form>
             </div>
         </div>
@@ -181,5 +191,6 @@
 </footer>
 
 <script src="js/bootstrap.bundle.min.js"></script>
+<script charset="utf-8" src="https://s.pageclip.co/v1/pageclip.js"></script>
 </body>
 </html>
