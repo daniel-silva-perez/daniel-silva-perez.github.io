@@ -514,6 +514,13 @@
             outline: 2px solid var(--primary);
             outline-offset: 3px;
             border-radius: 4px;
+        /* Page Load Fade Animation */
+        @keyframes pageLoadFade {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        body {
+            animation: pageLoadFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
     </style>
     <link rel="stylesheet" href="magazine.css">
