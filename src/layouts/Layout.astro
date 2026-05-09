@@ -1,11 +1,17 @@
 ---
+import SEO from '../components/SEO.astro';
+
 interface Props {
   title: string;
   description?: string;
   activeNav?: string;
+  image?: string;
+  pubDate?: Date;
+  updatedDate?: Date;
+  type?: 'website' | 'article';
 }
 
-const { title, description = "Danny Silva's public notebook for thoughts on philosophy, art, technology, attention, what he is building, and what he is reading.", activeNav } = Astro.props;
+const { title, description = "Danny Silva's public notebook for thoughts on philosophy, art, technology, attention, what he is building, and what he is reading.", activeNav, image, pubDate, updatedDate, type } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -15,6 +21,7 @@ const { title, description = "Danny Silva's public notebook for thoughts on phil
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <meta name="description" content={description}>
+    <SEO title={title} description={description} image={image} pubDate={pubDate} updatedDate={updatedDate} type={type} />
     <script is:inline src="/assets/js/theme.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

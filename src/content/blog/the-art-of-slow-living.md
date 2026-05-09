@@ -3,6 +3,8 @@ title: "The Art of Slow Living in a Fast-Paced World"
 description: "A personal note on attention, pace, and the small discipline of refusing to be hurried by everything."
 pubDate: 2024-12-15
 category: "Life"
+tags: ["Life", "Philosophy", "Attention"]
+draft: false
 heroImage: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80"
 ---
 

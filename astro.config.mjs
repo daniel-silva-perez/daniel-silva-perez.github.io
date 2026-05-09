@@ -6,5 +6,6 @@ export default defineConfig({
   outDir: './dist',
   build: {
     format: 'file'
-  }
+  },
+  integrations: []
 });
