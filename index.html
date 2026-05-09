@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danny Silva | Software Engineer</title>
-    <meta name="description" content="Software engineer building trading systems, AI infrastructure, and full-stack applications. TypeScript, Rust, Python, OCaml.">
+    <title>Danny Silva | Notes, Essays, and Work</title>
+    <meta name="description" content="Personal writing, notes, essays, travel, books, and selected software work by Danny Silva.">
     <style>
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         :root{
@@ -286,18 +286,19 @@
             section{padding:4rem 1.25rem}
         }
     </style>
+    <link rel="stylesheet" href="magazine.css">
 </head>
 <body>
 
 <!-- ── NAV ── -->
 <nav>
-    <div class="nav-logo">danny<span>.</span>dev</div>
+    <div class="nav-logo">Danny<span>.</span></div>
     <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
     <ul class="nav-links">
+        <li><a href="blog.html">Writing</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="archive.html">Archive</a></li>
     </ul>
 </nav>
 
@@ -306,24 +307,24 @@
     <div class="hero-bg"></div>
     <div class="grid-overlay"></div>
     <div class="hero-content">
-        <div class="hero-label fade-up">Open to Work</div>
-        <h1 class="fade-up d1">I build systems that <span class="gradient">think, trade, and scale.</span></h1>
+        <div class="hero-label fade-up">Personal magazine</div>
+        <h1 class="fade-up d1">Notes on living, building, and <span class="gradient">paying attention.</span></h1>
         <p class="hero-desc fade-up d2">
-            Software engineer with deep focus in quantitative trading systems, AI/ML infrastructure, and multi-agent orchestration. Fluent across the full stack, from OCaml trading engines to Rust on-chain bots to React frontends.
+            Life, essays, books, travel, and the occasional software note. I still build serious systems, but this site starts with the writing.
         </p>
         <div class="hero-buttons fade-up d3">
-            <a href="#projects" class="btn btn-primary">View My Work
+            <a href="blog.html" class="btn btn-primary">Read the Magazine
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
             </a>
-            <a href="https://github.com/danielsilvaperez" target="_blank" rel="noopener" class="btn btn-ghost">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub
+            <a href="#projects" class="btn btn-ghost">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
+                Projects
             </a>
         </div>
         <div class="stats fade-up d4">
-            <div class="stat"><div class="stat-num">7</div><div class="stat-label">Languages</div></div>
-            <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Projects</div></div>
-            <div class="stat"><div class="stat-num">5</div><div class="stat-label">Domains</div></div>
+            <div class="stat"><div class="stat-num">Life</div><div class="stat-label">Notes</div></div>
+            <div class="stat"><div class="stat-num">Books</div><div class="stat-label">Essays</div></div>
+            <div class="stat"><div class="stat-num">Tech</div><div class="stat-label">Sometimes</div></div>
         </div>
     </div>
 </section>
@@ -331,9 +332,9 @@
 <!-- ── FEATURED PROJECTS ── -->
 <section id="projects">
     <div class="section-header">
-        <div class="section-label fade-up">Featured Work</div>
-        <h2 class="fade-up d1">Projects that push boundaries</h2>
-        <p class="fade-up d2">Trading engines, AI runtimes, multi-agent systems, and full-stack apps.</p>
+        <div class="section-label fade-up">Selected Work</div>
+        <h2 class="fade-up d1">Builder notes, in public</h2>
+        <p class="fade-up d2">A compact shelf of software projects for the people here for the technical side.</p>
     </div>
 
     <div class="featured-grid">
@@ -520,8 +521,8 @@
 <!-- ── SKILLS ── -->
 <section id="skills" class="skills-section">
     <div class="section-header">
-        <div class="section-label fade-up">Technical Skills</div>
-        <h2 class="fade-up d1">What I work with</h2>
+        <div class="section-label fade-up">Toolbox</div>
+        <h2 class="fade-up d1">The technical shelf</h2>
     </div>
     <div class="skills-grid">
         <div class="skill-group fade-up">
@@ -577,26 +578,26 @@
 <section id="about" class="about-section">
     <div class="section-header">
         <div class="section-label fade-up">About</div>
-        <h2 class="fade-up d1">Who I am</h2>
+        <h2 class="fade-up d1">The person behind the notes</h2>
     </div>
     <div class="about-content">
         <p class="fade-up d2">
-            I'm <strong>Danny</strong>, an autodidact developer based in <strong>Florida</strong> putting myself through school while building real systems that solve real problems. I'm driven by a relentless curiosity &mdash; from functional trading engines in OCaml to AI inference runtimes to Rust-powered blockchain bots.
+            I'm <strong>Danny</strong>. I write about the ordinary stuff that keeps becoming important: routines, books, travel, attention, ambition, and what it means to build a life while building software.
         </p>
         <p class="fade-up d3">
-            I don't just write code. I architect systems that handle <strong>real money</strong>, <strong>real-time data</strong>, and <strong>real complexity</strong>. Every project in my portfolio is something I built because I wanted to understand how things actually work at the deepest level.
+            The software work is still here, but it is no longer the whole front door. It lives beside the personal writing as one part of a wider notebook.
         </p>
         <p class="fade-up d4">
-            Currently looking to connect with teams building ambitious things. If you're working on hard problems, let's talk.
+            If you are here for the technical side, start with the projects. If you are here for the human side, start with the writing.
         </p>
     </div>
 </section>
 
 <!-- ── CONTACT ── -->
 <section id="contact" class="cta">
-    <div class="section-label fade-up">Get In Touch</div>
-    <h2 class="fade-up d1">Let's build something together</h2>
-    <p class="fade-up d2">Always open to opportunities and conversations about interesting problems.</p>
+    <div class="section-label fade-up">Stay in touch</div>
+    <h2 class="fade-up d1">Read, browse, or say hello</h2>
+    <p class="fade-up d2">Start with the magazine, peek at the projects, or send a note.</p>
     <div class="cta-links fade-up d3">
         <a href="https://github.com/danielsilvaperez" target="_blank" rel="noopener" class="btn btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
