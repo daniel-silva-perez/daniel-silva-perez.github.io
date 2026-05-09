@@ -383,3 +383,14 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* Back to Top Button */
+.back-to-top {
+    background: var(--card-paper) !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--rule) !important;
+    box-shadow: var(--mag-shadow) !important;
+}
+.back-to-top:hover {
+    border-color: rgba(91, 75, 255, 0.42) !important;
+}
