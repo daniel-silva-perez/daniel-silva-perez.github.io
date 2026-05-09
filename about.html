@@ -419,6 +419,14 @@
             }
         }
 
+        /* Accessibility: Focus States */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
         /* Page Load Fade Animation */
         @keyframes pageLoadFade {
             from { opacity: 0; transform: translateY(12px); }
