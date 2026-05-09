@@ -41,9 +41,9 @@ window.addEventListener('scroll', () => {
 });
 
 // Share Functions
-function shareTwitter() {
+function shareTwitter(title) {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent('The Art of Slow Living in a Fast-Paced World');
+    const text = encodeURIComponent(title || document.title);
     window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
 }
 

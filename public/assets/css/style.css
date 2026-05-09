@@ -443,6 +443,55 @@ nav.scrolled{padding:.6rem 2rem}
 }
 [data-theme="dark"] .post-content blockquote { background: rgba(245,166,35,0.05); }
 
+/* Share Buttons */
+.share-section {
+    margin-top: 5rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+}
+.share-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+.share-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s var(--transition);
+}
+.share-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.25px;
+}
+.share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+.share-btn:active {
+    transform: translateY(0);
+}
+
 .author-bio {
     margin: 4rem 0;
     padding: 2.5rem;
