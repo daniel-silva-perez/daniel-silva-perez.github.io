@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Minimal.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --primary-hover: #1d4ed8;
+            --secondary: #6B7280;
+            --accent: #1A1A1A;
+            --surface: #FFFFFF;
+            --background: #FAFAFA;
+            --border: #E5E7EB;
+            --radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --max-width: 1200px;
+            --content-width: 720px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--accent);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s var(--transition);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 250, 250, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.125rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .btn-subscribe {
+            background: var(--primary);
+            color: white;
+            padding: 0.625rem 1.375rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.25s var(--transition);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-subscribe:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        /* About Hero */
+        .about-hero {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            right: -1.5rem;
+            bottom: -1.5rem;
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .about-intro h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .about-intro h1 span {
+            color: var(--primary);
+        }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: var(--secondary);
+            line-height: 1.75;
+        }
+
+        .about-text p {
+            margin-bottom: 1.25rem;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        .philosophy-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .philosophy-card {
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .philosophy-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, #60a5fa 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .philosophy-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .philosophy-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .philosophy-card p {
+            font-size: 0.9375rem;
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 4rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .contact-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.0625rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.0625rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s var(--transition);
+            position: relative;
+        }
+
+        .contact-email:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-email svg {
+            width: 20px;
+            height: 20px;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+            background: var(--surface);
+            margin-top: 6rem;
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .footer-brand span {
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--secondary);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copy {
+            font-size: 0.875rem;
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-hero {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            .about-image {
+                order: -1;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .about-image::after {
+                display: none;
+            }
+            .about-intro h1 {
+                font-size: 2.5rem;
+            }
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                padding: 1rem 1.5rem;
+            }
+            nav a:not(.btn-subscribe) {
+                display: none;
+            }
+            .about-hero {
+                padding: 3rem 1.5rem;
+            }
+            .about-intro h1 {
+                font-size: 2rem;
+            }
+            .about-text {
+                font-size: 1rem;
+            }
+            .contact {
+                margin: 0 1.5rem;
+                padding: 2.5rem 2rem;
+            }
+            .contact-title {
+                font-size: 1.5rem;
+            }
+            .footer-inner {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="blog.html" class="logo">Minimal<span>.</span></a>
+            <nav>
+                <a href="blog.html">Home</a>
+                <a href="archive.html">Archive</a>
+                <a href="about.html" class="active">About</a>
+                <a href="#" class="btn-subscribe">Subscribe</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face" alt="Author portrait">
+            </div>
+            <div class="about-intro">
+                <h1>Writing about the things that <span>matter most</span></h1>
+                <div class="about-text">
+                    <p>Hey, I'm Elena. I'm a writer, photographer, and occasional traveler based in Berlin. This is where I share essays on slow living, intentional technology, and the pursuit of a more deliberate life.</p>
+                    <p>After years in the fast-paced world of startups, I realized that the most valuable thing I could do was nothing at all — or rather, to do things with intention and presence rather than constant urgency.</p>
+                    <p>Minimal. is my attempt to create a space for thoughtful writing in a world of hot takes and hot leads. Every piece here is crafted to give you a moment of pause, a breath of fresh air, and perhaps a new way of seeing something familiar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="philosophy">
+            <h3 class="philosophy-title">What I Believe</h3>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>Intentional Slowth</h3>
+                    <p>Not all productivity is created equal. I believe in doing fewer things, but doing them with more presence, depth, and satisfaction.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Design for Living</h3>
+                    <p>The spaces we inhabit shape our minds. I write about how thoughtful design — in our homes, our tools, our routines — can create room for clarity.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Words Matter</h3>
+                    <p>We're drowning in content but starving for meaning. Each essay here is written to be savored, not skimmed — a small act of resistance against the attention economy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="philosophy">
+            <div class="contact">
+                <h2 class="contact-title">Let's Connect</h2>
+                <p class="contact-text">Interested in collaborating or just want to say hello? I'd love to hear from you.</p>
+                <a href="mailto:hello@minimal.blog" class="contact-email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M22 7l-10 6L2 7"/>
+                    </svg>
+                    hello@minimal.blog
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <a href="blog.html" class="footer-brand">Minimal<span>.</span></a>
+            <div class="footer-links">
+                <a href="blog.html">Home</a>
+                <a href="archive.html">Archive</a>
+                <a href="about.html">About</a>
+                <a href="#">RSS</a>
+                <a href="mailto:hello@minimal.blog">Contact</a>
+            </div>
+            <p class="footer-copy">© 2026 Minimal. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
