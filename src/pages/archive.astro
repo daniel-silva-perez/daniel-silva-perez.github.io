@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Archive — Danny Silva | Blog" activeNav="archive">
+    <main>
+        <section class="archive-hero">
+            <h1 class="archive-title">Archive</h1>
+            <p class="archive-subtitle">Life, notes, essays, travel, books, and a few tech things when they are worth writing down.</p>
+
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">All Posts</button>
+                <button class="category-btn" data-category="life">Life</button>
+                <button class="category-btn" data-category="notes">Notes</button>
+                <button class="category-btn" data-category="essays">Essays</button>
+                <button class="category-btn" data-category="travel">Travel</button>
+                <button class="category-btn" data-category="books">Books</button>
+                <button class="category-btn" data-category="tech">Tech</button>
+            </div>
+        </section>
+
+        <section class="archive-content">
+            <div class="posts-list">
+                <article class="post-row" data-category="life" onclick="location.href='/blog/the-art-of-slow-living'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop" alt="Coffee">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Life</span>
+                            <span class="post-date">May 5, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">The Ritual of Morning Coffee</h3>
+                        <p class="post-row-excerpt">Why the simplest routines often hold the deepest meaning, and how to make every cup count.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="notes" onclick="location.href='/blog/the-art-of-slow-living'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=400&fit=crop" alt="Notebook">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Notes</span>
+                            <span class="post-date">May 2, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Small Things I Keep Coming Back To</h3>
+                        <p class="post-row-excerpt">A running list of habits, objects, places, and ideas that keep making ordinary days better.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="essays" onclick="location.href='/blog/the-art-of-slow-living'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop" alt="Notebook">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Essays</span>
+                            <span class="post-date">April 28, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">On Letting a Year Be Uneven</h3>
+                        <p class="post-row-excerpt">Some seasons are for output, some are for repair, and some only make sense in hindsight.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="books" onclick="location.href='/blog/the-art-of-slow-living'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0a2429b89?w=600&h=400&fit=crop" alt="Books">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Books</span>
+                            <span class="post-date">April 22, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Books That Made Me Less Restless</h3>
+                        <p class="post-row-excerpt">A few reads that changed how I think about ambition, patience, and attention.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="travel" onclick="location.href='/blog/the-art-of-slow-living'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="Portugal">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Travel</span>
+                            <span class="post-date">April 18, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Lessons from the Portuguese Coast</h3>
+                        <p class="post-row-excerpt">Wandering through Lisbon and Porto, discovering the beauty of impermanence.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="tech" onclick="location.href='/blog/the-art-of-slow-living'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="Code editor">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag tech-label">Tech</span>
+                            <span class="post-date">April 14, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">The Future of AI-Assisted Development</h3>
+                        <p class="post-row-excerpt">A quieter technical note on how language models are changing the way software gets made.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script is:inline src="/assets/js/archive.js"></script>
+</Layout>

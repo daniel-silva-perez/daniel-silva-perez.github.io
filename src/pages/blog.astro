@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const featuredPost = posts[0];
+const otherPosts = posts.slice(1);
+---
+
+<Layout title="Danny Silva | Blog" activeNav="blog">
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    {featuredPost && (
+    <section class="hero">
+        <a href={`/blog/${featuredPost.slug}`} class="hero-card">
+            <img src={featuredPost.data.heroImage} alt={featuredPost.data.title}>
+            <div class="hero-overlay">
+                <span class="hero-category">Featured</span>
+                <h1 class="hero-title">{featuredPost.data.title}</h1>
+                <p class="hero-excerpt">{featuredPost.data.description}</p>
+                <div class="hero-meta">
+                    <span>Danny Silva</span>
+                    <span class="dot"></span>
+                    <span>{featuredPost.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                    <span class="dot"></span>
+                    <span>8 min read</span>
+                </div>
+            </div>
+        </a>
+    </section>
+    )}
+
+    <section class="categories-section">
+        <div class="categories-header">
+            <h2 class="categories-title">Notes, essays, travel, books, and the occasional tech thing</h2>
+        </div>
+        <div class="categories-scroll">
+            <a href="/tags" class="category-chip">
+                <span class="category-chip-name">Life</span>
+                <span class="category-chip-count">8 posts</span>
+            </a>
+            <a href="/tags" class="category-chip">
+                <span class="category-chip-name">Notes</span>
+                <span class="category-chip-count">11 posts</span>
+            </a>
+            <a href="/tags" class="category-chip">
+                <span class="category-chip-name">Essays</span>
+                <span class="category-chip-count">10 posts</span>
+            </a>
+            <a href="/tags" class="category-chip">
+                <span class="category-chip-name">Travel</span>
+                <span class="category-chip-count">5 posts</span>
+            </a>
+            <a href="/tags" class="category-chip">
+                <span class="category-chip-name">Books</span>
+                <span class="category-chip-count">6 posts</span>
+            </a>
+            <a href="/tags" class="category-chip">
+                <span class="category-chip-name">Tech</span>
+                <span class="category-chip-count">4 posts</span>
+            </a>
+        </div>
+    </section>
+
+    <h2 class="section-title">Latest Writing</h2>
+
+    <section class="posts-grid">
+        {posts.map((post) => (
+        <article class="post-card" onclick={`location.href='/blog/${post.slug}'`}>
+            <div class="post-card-image">
+                <img src={post.data.heroImage} alt={post.data.title}>
+            </div>
+            <div class="post-card-content">
+                <span class={`post-card-category ${post.data.category === 'Tech' ? 'tech-label' : ''}`}>{post.data.category}</span>
+                <h3 class="post-card-title">{post.data.title}</h3>
+                <p class="post-card-excerpt">{post.data.description}</p>
+                <div class="post-card-footer">
+                    <div class="post-card-author">
+                        <div class="author-avatar">DS</div>
+                        <span class="author-name">Danny Silva</span>
+                    </div>
+                    <div class="post-card-meta">
+                        <span>{post.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                        <span class="reading-time">6 min read</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+        ))}
+    </section>
+
+    <script is:inline src="/assets/js/blog.js"></script>
+</Layout>
