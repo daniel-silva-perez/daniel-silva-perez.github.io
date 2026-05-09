@@ -24,6 +24,7 @@
             --border: #E5E7EB;
             --radius: 12px;
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
             --max-width: 1200px;
             --content-width: 720px;
             --transition: cubic-bezier(0.4, 0, 0.2, 1);
@@ -52,6 +53,18 @@
             color: inherit;
             text-decoration: none;
             transition: color 0.2s var(--transition);
+        }
+
+        /* Reading Progress Bar */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), #60a5fa);
+            z-index: 1000;
+            width: 0%;
+            transition: width 0.1s linear;
         }
 
         /* Header */
@@ -180,134 +193,148 @@
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            background: var(--secondary);
-            opacity: 0.4;
+            background: var(--border);
         }
 
-        .author-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, #60a5fa 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 0.875rem;
-        }
-
-        .author-name {
-            font-weight: 600;
-            color: var(--accent);
-        }
-
-        /* Featured Image */
-        .post-featured-image {
-            max-width: 900px;
-            margin: 0 auto 4rem;
+        /* Post Layout */
+        .post-layout {
+            max-width: var(--max-width);
+            margin: 0 auto;
             padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 4rem;
+            align-items: start;
         }
 
-        .post-featured-image img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        /* Table of Contents */
+        .toc {
+            position: sticky;
+            top: 100px;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .toc-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc-list a {
+            font-size: 0.875rem;
+            color: var(--secondary);
+            display: block;
+            padding: 0.25rem 0;
+            border-left: 2px solid transparent;
+            padding-left: 0.875rem;
+            margin-left: -0.875rem;
+            transition: all 0.2s var(--transition);
+        }
+
+        .toc-list a:hover {
+            color: var(--primary);
+        }
+
+        .toc-list a.active {
+            color: var(--primary);
+            border-left-color: var(--primary);
+            font-weight: 600;
+        }
+
+        .toc-mobile-toggle {
+            display: none;
         }
 
         /* Post Content */
         .post-content {
             max-width: var(--content-width);
-            margin: 0 auto;
-            padding: 0 2rem 6rem;
+        }
+
+        .post-featured-image {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 3rem;
         }
 
         .post-content p {
-            font-size: 1.125rem;
-            margin-bottom: 1.75rem;
+            font-size: 1.0625rem;
+            line-height: 1.8;
             color: #374151;
+            margin-bottom: 1.75rem;
         }
 
         .post-content h2 {
-            font-size: 1.75rem;
+            font-size: 1.875rem;
             margin-top: 3rem;
             margin-bottom: 1.25rem;
+            color: var(--accent);
+            scroll-margin-top: 100px;
         }
 
         .post-content h3 {
-            font-size: 1.375rem;
+            font-size: 1.5rem;
             margin-top: 2.5rem;
             margin-bottom: 1rem;
+            color: var(--accent);
         }
 
         .post-content blockquote {
-            border-left: 4px solid var(--primary);
+            border-left: 3px solid var(--primary);
             padding-left: 1.5rem;
-            margin: 2rem 0;
+            margin: 2.5rem 0;
             font-style: italic;
             color: var(--secondary);
-            font-size: 1.25rem;
+            font-size: 1.125rem;
+            line-height: 1.7;
         }
 
         .post-content ul, .post-content ol {
-            margin-bottom: 1.75rem;
+            margin: 1.5rem 0;
             padding-left: 1.5rem;
         }
 
         .post-content li {
             margin-bottom: 0.75rem;
+            font-size: 1.0625rem;
+            line-height: 1.7;
             color: #374151;
-            font-size: 1.125rem;
         }
 
-        .post-content a {
-            color: var(--primary);
-            text-decoration: underline;
-            text-underline-offset: 3px;
+        .post-content strong {
+            color: var(--accent);
+            font-weight: 600;
         }
 
-        .post-content a:hover {
-            color: var(--primary-hover);
-        }
-
-        /* Post Footer */
-        .post-footer {
-            max-width: var(--content-width);
-            margin: 0 auto;
-            padding: 3rem 2rem;
+        /* Share Buttons */
+        .share-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
             border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        .post-tags {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        .post-tag {
-            padding: 0.5rem 1rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 0.8125rem;
-            font-weight: 500;
+        .share-title {
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             color: var(--secondary);
-            transition: all 0.2s var(--transition);
-        }
-
-        .post-tag:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+            margin-bottom: 1rem;
         }
 
         .share-buttons {
@@ -316,15 +343,17 @@
         }
 
         .share-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: var(--secondary);
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: inherit;
             cursor: pointer;
             transition: all 0.2s var(--transition);
         }
@@ -332,6 +361,7 @@
         .share-btn:hover {
             border-color: var(--primary);
             color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .share-btn svg {
@@ -339,19 +369,78 @@
             height: 18px;
         }
 
+        /* Author Bio Card */
+        .author-bio {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .author-bio-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #60a5fa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .author-bio-content {
+            flex: 1;
+        }
+
+        .author-bio-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-bio-role {
+            font-size: 0.875rem;
+            color: var(--secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .author-bio-text {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        .author-bio-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .author-bio-social a {
+            color: var(--secondary);
+            transition: color 0.2s;
+        }
+
+        .author-bio-social a:hover {
+            color: var(--primary);
+        }
+
         /* Related Posts */
         .related-posts {
             max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 4rem 2rem 6rem;
+            margin: 5rem auto;
+            padding: 0 2rem;
         }
 
         .related-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--secondary);
+            font-size: 1.5rem;
             margin-bottom: 2rem;
         }
 
@@ -365,15 +454,14 @@
             background: var(--surface);
             border-radius: var(--radius);
             overflow: hidden;
-            border: 1px solid rgba(229, 231, 235, 0.5);
-            transition: all 0.35s var(--transition);
+            border: 1px solid var(--border);
             cursor: pointer;
+            transition: all 0.3s var(--transition);
         }
 
         .related-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-            border-color: transparent;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
         }
 
         .related-card-image {
@@ -385,7 +473,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s var(--transition);
+            transition: transform 0.4s var(--transition);
         }
 
         .related-card:hover .related-card-image img {
@@ -397,255 +485,427 @@
         }
 
         .related-card-category {
+            display: inline-block;
             color: var(--primary);
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.08em;
             margin-bottom: 0.5rem;
         }
 
         .related-card-title {
-            font-size: 1rem;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            font-size: 1.0625rem;
+            line-height: 1.35;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s var(--transition);
+            box-shadow: var(--shadow-sm);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .back-to-top:hover svg {
+            stroke: white;
         }
 
         /* Footer */
         footer {
             border-top: 1px solid var(--border);
-            padding: 4rem 2rem;
-            background: var(--surface);
-        }
-
-        .footer-inner {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-brand {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-        }
-
-        .footer-brand span {
-            color: var(--primary);
+            padding: 3rem 2rem;
+            text-align: center;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .footer-links a {
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             color: var(--secondary);
+            transition: color 0.2s;
         }
 
         .footer-links a:hover {
             color: var(--accent);
         }
 
-        .footer-copy {
+        .footer-copyright {
             font-size: 0.875rem;
             color: var(--secondary);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .header-inner {
-                padding: 1rem 1.5rem;
+        @media (max-width: 1024px) {
+            .post-layout {
+                grid-template-columns: 1fr;
             }
-            nav a:not(.btn-subscribe) {
+
+            .toc {
                 display: none;
+                position: static;
+                margin-bottom: 2rem;
             }
-            .post-hero {
-                padding: 2.5rem 1.5rem 2rem;
+
+            .toc-mobile-toggle {
+                display: block;
+                width: 100%;
+                padding: 1rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                font-family: inherit;
+                font-size: 0.9375rem;
+                font-weight: 600;
+                color: var(--accent);
+                cursor: pointer;
+                margin-bottom: 1rem;
             }
+
+            .toc-mobile-toggle::after {
+                content: '▼';
+                float: right;
+                transition: transform 0.2s;
+            }
+
+            .toc-mobile-toggle.open::after {
+                transform: rotate(180deg);
+            }
+
+            .toc.toc-visible {
+                display: block;
+            }
+
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
             .post-title {
                 font-size: 2rem;
             }
-            .post-featured-image img {
+
+            .post-meta {
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            .post-featured-image {
                 height: 280px;
             }
-            .post-content {
-                padding: 0 1.5rem 4rem;
-            }
-            .post-content p {
-                font-size: 1.0625rem;
-            }
-            .post-footer {
+
+            .author-bio {
                 flex-direction: column;
-                gap: 1.5rem;
                 text-align: center;
+                align-items: center;
             }
+
+            .share-buttons {
+                flex-wrap: wrap;
+            }
+
             .related-grid {
                 grid-template-columns: 1fr;
             }
-            .footer-inner {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
+
+            nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <div class="reading-progress" id="readingProgress"></div>
+
     <header>
         <div class="header-inner">
             <a href="blog.html" class="logo">Minimal<span>.</span></a>
             <nav>
-                <a href="blog.html">Home</a>
+                <a href="blog.html" class="active">Blog</a>
                 <a href="archive.html">Archive</a>
+                <a href="tags.html">Tags</a>
                 <a href="about.html">About</a>
-                <a href="#" class="btn-subscribe">Subscribe</a>
+                <a href="index.html">Portfolio</a>
             </nav>
+            <a href="blog.html#newsletter" class="btn-subscribe">Subscribe</a>
         </div>
     </header>
 
-    <main>
-        <article>
-            <header class="post-hero">
-                <a href="#" class="post-category">Featured</a>
-                <h1 class="post-title">The Art of Slow Living in a Fast-Paced World</h1>
-                <div class="post-meta">
-                    <div class="author-info">
-                        <div class="author-avatar">EF</div>
-                        <span class="author-name">Elena Fischer</span>
-                    </div>
-                    <span class="divider"></span>
-                    <span>May 8, 2026</span>
-                    <span class="divider"></span>
-                    <span>8 min read</span>
-                </div>
-            </header>
-
-            <div class="post-featured-image">
-                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a666ae?w=1200&h=600&fit=crop" alt="Featured post">
+    <article>
+        <div class="post-hero">
+            <span class="post-category">Life</span>
+            <h1 class="post-title">The Art of Slow Living in a Fast-Paced World</h1>
+            <div class="post-meta">
+                <span>Danny Silva</span>
+                <span class="divider"></span>
+                <span>Dec 15, 2024</span>
+                <span class="divider"></span>
+                <span>8 min read</span>
             </div>
+        </div>
+
+        <div class="post-layout">
+            <aside>
+                <button class="toc-mobile-toggle" id="tocToggle" onclick="toggleToc()">Table of Contents</button>
+                <nav class="toc" id="toc">
+                    <div class="toc-title">On this page</div>
+                    <ul class="toc-list">
+                        <li><a href="#introduction" class="active">Introduction</a></li>
+                        <li><a href="#the-problem">The Problem with Speed</a></li>
+                        <li><a href="#embracing-slow">Embracing the Slow</a></li>
+                        <li><a href="#practical-steps">Practical Steps</a></li>
+                        <li><a href="#conclusion">Conclusion</a></li>
+                    </ul>
+                </nav>
+            </aside>
 
             <div class="post-content">
-                <p>In an age that celebrates hustle culture and constant productivity, the idea of slowing down can feel almost heretical. We wear exhaustion as a badge of honor, measure our worth by our output, and treat rest as a luxury we haven't earned yet.</p>
+                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80" alt="Writing desk" class="post-featured-image">
 
-                <p>But what if the most radical act of rebellion is simply to be present? To taste our food without scrolling? To watch a sunset without capturing it for posterity? To let our minds wander without immediately filling the silence with notifications?</p>
+                <p id="introduction">We live in an age of acceleration. Everything around us demands speed—instant responses, same-day deliveries, real-time updates. Our attention is fragmented across dozens of apps, notifications, and feeds. We're always connected, yet rarely present.</p>
 
-                <h2>The Paradox of Progress</h2>
+                <p>But what if the answer isn't to move faster, but to intentionally slow down? What if the most productive thing we can do is to step back and breathe?</p>
 
-                <p>Somewhere along the way, the goal of technology became to give us more time. And yet, somehow, we feel busier than ever. Our devices promise efficiency but deliver infinite distraction. Our inboxes overflow, our calendars fragment, and the concept of "free time" has become a relic of a simpler era.</p>
+                <h2 id="the-problem">The Problem with Speed</h2>
 
-                <p>The irony is that while we've outsourced countless tasks to machines, we seem to have less time for the things that actually matter: deep work, meaningful connection, quiet reflection, and genuine rest.</p>
+                <p>Our culture glorifies busyness. We wear our packed schedules like badges of honor. The startup world fetishizes "hustle culture." Social media rewards constant content creation. We're told that if we're not moving forward, we're falling behind.</p>
 
-                <blockquote>The goal is not to do more, but to do what matters — and to do it with presence rather than urgency.</blockquote>
+                <p>But this relentless pace comes at a cost. Burnout is at an all-time high. Anxiety disorders are increasingly common. Our relationships suffer because we're physically present but mentally elsewhere. We consume more information than ever, yet retain less.</p>
 
-                <h2>Reclaiming the Art of Doing Nothing</h2>
+                <blockquote>"The world breaks everyone, and afterward, some are strong at the broken places." — Ernest Hemingway</blockquote>
 
-                <p>The Danes have a word for it: <em>hyggeligt</em>. It describes a quality of coziness and comfortable conviviality that comes from the simple act of being present with good people or peaceful solitude. It's the antithesis of productivity culture — and perhaps precisely why Denmark consistently ranks among the world's happiest nations.</p>
+                <p>The irony is that our obsession with productivity often makes us less productive. Studies show that multitasking reduces efficiency by up to 40%. Constant context-switching depletes our cognitive resources. We're busy, but we're not effective.</p>
 
-                <p>Slow living isn't about doing everything at a snail's pace. It's about being intentional with your time and energy. It's choosing depth over breadth, quality over quantity, and presence over performance.</p>
+                <h2 id="embracing-slow">Embracing the Slow</h2>
 
-                <h3>Practical Steps Toward Slowness</h3>
+                <p>Slow living isn't about doing everything at a snail's pace. It's about doing things at the right speed. It's about intentionality—choosing quality over quantity, depth over breadth, presence over distraction.</p>
 
-                <p>Start with the morning. Resist the urge to reach for your phone. Make coffee slowly, intentionally. Sit with it. Watch the light change. Let your thoughts arrive without immediately organizing them into tasks.</p>
+                <p>The slow food movement started in Italy as a response to fast food. It wasn't just about cooking slowly; it was about savoring meals, understanding where food comes from, and connecting with the people we eat with. The same philosophy can apply to every area of our lives.</p>
 
-                <p>Then extend this practice through the day: eat without screens, walk without podcasts, conversations without agendas. Notice where your attention goes when you're not directing it. You'll likely discover a creativity and clarity that's been drowned out by the noise.</p>
+                <h3>Quality Over Quantity</h3>
 
-                <p>The world will not fall apart if you respond to that email in an hour instead of immediately. The news will still be there tomorrow. Your worth as a human being is not measured by your response time.</p>
+                <p>Instead of reading fifty books a year, what if we read ten and truly absorbed them? Instead of maintaining shallow connections with hundreds of people, what if we invested deeply in a few meaningful relationships? Instead of chasing every opportunity, what if we focused on the ones that truly matter?</p>
 
-                <h2>The Deeper Invitation</h2>
+                <p>This isn't about mediocrity. It's about excellence through focus. The best work comes from sustained attention, not fragmented efforts.</p>
 
-                <p>Slow living is ultimately an invitation to examine what we actually want from our brief time on this planet. It's a chance to step off the treadmill and ask: <em>what's this all for?</em></p>
+                <h2 id="practical-steps">Practical Steps</h2>
 
-                <p>The answer, I suspect, is different for each of us. But I suspect it rarely involves more notifications, busier schedules, or optimized mornings. It probably looks more like: presence, connection, creation, rest, wonder.</p>
+                <p>Transitioning to a slower pace doesn't require moving to a cabin in the woods (though that sounds nice). Small, intentional changes can make a significant difference:</p>
 
-                <p>The art of slow living isn't a return to some romanticized past. It's a forward-looking choice to not let the future rush past while you're busy optimizing for it. It's the radical realization that you already have everything you need to be happy — right here, right now, if you can just slow down enough to notice.</p>
-            </div>
+                <ul>
+                    <li><strong>Protect your mornings.</strong> Don't check your phone for the first hour after waking. Use that time for reflection, exercise, or a meaningful activity.</li>
+                    <li><strong>Single-task.</strong> Focus on one thing at a time. Close unnecessary tabs. Put your phone in another room. Give your full attention to the task at hand.</li>
+                    <li><strong>Build in buffer time.</strong> Don't schedule every minute of your day. Leave space for spontaneity, rest, and unexpected opportunities.</li>
+                    <li><strong>Practice digital minimalism.</strong> Curate your digital environment. Unsubscribe from newsletters you don't read. Delete apps that don't add value. Turn off non-essential notifications.</li>
+                    <li><strong>Embrace boredom.</strong> Resist the urge to fill every idle moment with stimulation. Boredom is where creativity often begins.</li>
+                </ul>
 
-            <footer class="post-footer">
-                <div class="post-tags">
-                    <a href="#" class="post-tag">Lifestyle</a>
-                    <a href="#" class="post-tag">Mindfulness</a>
-                    <a href="#" class="post-tag">Productivity</a>
+                <h2 id="conclusion">Conclusion</h2>
+
+                <p>The art of slow living isn't a rejection of modern life. It's a reclaiming of it. It's about using technology and modern conveniences as tools rather than letting them use us. It's about being the authors of our own lives rather than characters in someone else's algorithm.</p>
+
+                <p>In a world that constantly demands more, choosing less is a radical act. It's a declaration that our time, attention, and energy are precious—and we're going to spend them on what truly matters.</p>
+
+                <p>So take a deep breath. Look around you. The world will keep spinning whether you're rushing or walking. You might as well enjoy the view.</p>
+
+                <!-- Share Buttons -->
+                <div class="share-section">
+                    <div class="share-title">Share this article</div>
+                    <div class="share-buttons">
+                        <button class="share-btn" onclick="shareTwitter()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                            Share on X
+                        </button>
+                        <button class="share-btn" onclick="shareLinkedIn()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            LinkedIn
+                        </button>
+                        <button class="share-btn" onclick="copyLink()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            Copy Link
+                        </button>
+                    </div>
                 </div>
-                <div class="share-buttons">
-                    <button class="share-btn" title="Copy link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                        </svg>
-                    </button>
-                    <button class="share-btn" title="Share on Twitter">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </button>
+
+                <!-- Author Bio -->
+                <div class="author-bio">
+                    <div class="author-bio-avatar">DS</div>
+                    <div class="author-bio-content">
+                        <div class="author-bio-name">Danny Silva</div>
+                        <div class="author-bio-role">Software Engineer & Writer</div>
+                        <p class="author-bio-text">Building trading systems and AI infrastructure by day, writing about technology and life by night. Based in San Francisco. Always learning, occasionally shipping.</p>
+                        <div class="author-bio-social">
+                            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                            </a>
+                            <a href="https://github.com" target="_blank" aria-label="GitHub">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </footer>
-        </article>
-
-        <section class="related-posts">
-            <h3 class="related-title">Continue Reading</h3>
-            <div class="related-grid">
-                <article class="related-card">
-                    <div class="related-card-image">
-                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop" alt="Mountain">
-                    </div>
-                    <div class="related-card-content">
-                        <span class="related-card-category">Travel</span>
-                        <h4 class="related-card-title">Finding Solitude in the Swiss Alps</h4>
-                    </div>
-                </article>
-
-                <article class="related-card">
-                    <div class="related-card-image">
-                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop" alt="Coffee">
-                    </div>
-                    <div class="related-card-content">
-                        <span class="related-card-category">Lifestyle</span>
-                        <h4 class="related-card-title">The Ritual of Morning Coffee</h4>
-                    </div>
-                </article>
-
-                <article class="related-card">
-                    <div class="related-card-image">
-                        <img src="https://images.unsplash.com/photo-1542831371-29b0a2429b89?w=600&h=400&fit=crop" alt="Books">
-                    </div>
-                    <div class="related-card-content">
-                        <span class="related-card-category">Books</span>
-                        <h4 class="related-card-title">Why I Stopped Chasing Productivity</h4>
-                    </div>
-                </article>
             </div>
-        </section>
-    </main>
+        </div>
+    </article>
+
+    <section class="related-posts">
+        <h2 class="related-title">Related Reading</h2>
+        <div class="related-grid">
+            <article class="related-card" onclick="location.href='post.html'">
+                <div class="related-card-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Coffee">
+                </div>
+                <div class="related-card-content">
+                    <span class="related-card-category">Life</span>
+                    <h3 class="related-card-title">Morning Routines That Actually Work</h3>
+                </div>
+            </article>
+
+            <article class="related-card" onclick="location.href='post.html'">
+                <div class="related-card-image">
+                    <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&q=80" alt="Productivity">
+                </div>
+                <div class="related-card-content">
+                    <span class="related-card-category">Productivity</span>
+                    <h3 class="related-card-title">Deep Work in a Distracted World</h3>
+                </div>
+            </article>
+
+            <article class="related-card" onclick="location.href='post.html'">
+                <div class="related-card-image">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80" alt="Nature">
+                </div>
+                <div class="related-card-content">
+                    <span class="related-card-category">Travel</span>
+                    <h3 class="related-card-title">Finding Solitude in the Mountains</h3>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
 
     <footer>
-        <div class="footer-inner">
-            <a href="blog.html" class="footer-brand">Minimal<span>.</span></a>
-            <div class="footer-links">
-                <a href="blog.html">Home</a>
-                <a href="archive.html">Archive</a>
-                <a href="about.html">About</a>
-                <a href="#">RSS</a>
-                <a href="mailto:hello@minimal.blog">Contact</a>
-            </div>
-            <p class="footer-copy">© 2026 Minimal. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="blog.html">Blog</a>
+            <a href="archive.html">Archive</a>
+            <a href="tags.html">Tags</a>
+            <a href="about.html">About</a>
+            <a href="index.html">Portfolio</a>
         </div>
+        <p class="footer-copyright"> 2024 Minimal. All rights reserved.</p>
     </footer>
 
     <script>
-        document.querySelector('.share-btn[title="Copy link"]').addEventListener('click', function() {
-            navigator.clipboard.writeText(window.location.href);
-            this.title = 'Copied!';
-            setTimeout(() => this.title = 'Copy link', 2000);
+        // Reading Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('readingProgress').style.width = scrollPercent + '%';
         });
+
+        // Back to Top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // TOC Mobile Toggle
+        function toggleToc() {
+            const toc = document.getElementById('toc');
+            const toggle = document.getElementById('tocToggle');
+            toc.classList.toggle('toc-visible');
+            toggle.classList.toggle('open');
+        }
+
+        // TOC Active State
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        const sections = document.querySelectorAll('.post-content h2[id], .post-content h3[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Share Functions
+        function shareTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('The Art of Slow Living in a Fast-Paced World');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const btn = event.currentTarget;
+                const original = btn.innerHTML;
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                }, 2000);
+            });
+        }
     </script>
 </body>
 </html>

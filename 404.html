@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found — Minimal.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --primary-hover: #1d4ed8;
+            --secondary: #6B7280;
+            --accent: #1A1A1A;
+            --surface: #FFFFFF;
+            --background: #FAFAFA;
+            --border: #E5E7EB;
+            --radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --max-width: 1200px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--accent);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s var(--transition);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 250, 250, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.125rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Error Content */
+        .error-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .error-code {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--primary) 0%, #60a5fa 50%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            margin-bottom: 1rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .error-visual {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+        }
+
+        .error-circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+        }
+
+        .error-circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 0;
+            left: 0;
+            border-color: rgba(37, 99, 235, 0.2);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .error-circle:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 25px;
+            left: 25px;
+            border-color: rgba(37, 99, 235, 0.3);
+            animation: pulse 3s ease-in-out infinite 0.5s;
+        }
+
+        .error-circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 50px;
+            left: 50px;
+            border-color: rgba(37, 99, 235, 0.4);
+            animation: pulse 3s ease-in-out infinite 1s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.7;
+            }
+        }
+
+        .error-face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+        }
+
+        .error-title {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .error-subtitle {
+            font-size: 1.0625rem;
+            color: var(--secondary);
+            max-width: 420px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 10px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            transition: all 0.25s var(--transition);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--accent);
+            padding: 0.875rem 1.75rem;
+            border-radius: 10px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            transition: all 0.25s var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="blog.html" class="logo">Minimal<span>.</span></a>
+            <nav>
+                <a href="blog.html">Blog</a>
+                <a href="archive.html">Archive</a>
+                <a href="tags.html">Tags</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Portfolio</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-visual">
+            <div class="error-circle"></div>
+            <div class="error-circle"></div>
+            <div class="error-circle"></div>
+            <div class="error-face">&#x1F615;</div>
+        </div>
+        <h1 class="error-title">Page not found</h1>
+        <p class="error-subtitle">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+        <div class="error-actions">
+            <a href="blog.html" class="btn-primary">Back to Blog</a>
+            <a href="index.html" class="btn-secondary">Go Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="blog.html">Blog</a>
+            <a href="archive.html">Archive</a>
+            <a href="tags.html">Tags</a>
+            <a href="about.html">About</a>
+            <a href="index.html">Portfolio</a>
+        </div>
+        <p class="footer-copyright"> 2024 Minimal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
