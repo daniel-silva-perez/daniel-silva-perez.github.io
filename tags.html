@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags — Minimal.</title>
+    <title>Tags — Danny Silva | Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -401,6 +401,55 @@
             color: var(--secondary);
         }
 
+        /* Blog UX refresh */
+        :root {
+            --primary: #6c63ff;
+            --primary-hover: #5b52f0;
+            --secondary: #6f7284;
+            --accent: #15151f;
+            --surface: #ffffff;
+            --background: #f6f7fb;
+            --border: #e2e5ee;
+            --radius: 10px;
+            --shadow-sm: 0 1px 2px rgba(21, 21, 31, 0.04);
+            --shadow-md: 0 14px 34px rgba(21, 21, 31, 0.1);
+        }
+
+        body {
+            background:
+                linear-gradient(180deg, rgba(108, 99, 255, 0.08), transparent 360px),
+                var(--background);
+        }
+
+        .header-inner {
+            min-height: 72px;
+            gap: 1.5rem;
+        }
+
+        nav {
+            gap: 1.5rem;
+        }
+
+        .tags-title {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            letter-spacing: -0.02em;
+        }
+
+        .search-input {
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tag {
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tagged-post-card {
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .tagged-posts-list {
@@ -409,12 +458,39 @@
         }
 
         @media (max-width: 768px) {
-            .tags-title {
-                font-size: 2.5rem;
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 1rem 1.25rem;
+            }
+
+            nav {
+                display: flex;
+                width: 100%;
+                gap: 0.5rem;
+                overflow-x: auto;
+                padding-bottom: 0.25rem;
+            }
+
+            nav a {
+                white-space: nowrap;
+                padding: 0.35rem 0;
+            }
+
+            .btn-subscribe {
+                position: absolute;
+                top: 0.9rem;
+                right: 1.25rem;
+                padding: 0.5rem 0.9rem;
+            }
+
+            .tags-hero {
+                padding: 3rem 1.25rem 2rem;
             }
 
             .tag-cloud {
                 gap: 0.75rem;
+                padding: 0 1rem;
             }
 
             .tag {
@@ -424,17 +500,13 @@
             .tagged-posts-list {
                 grid-template-columns: 1fr;
             }
-
-            nav {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="header-inner">
-            <a href="blog.html" class="logo">Minimal<span>.</span></a>
+            <a href="blog.html" class="logo">Danny<span>.</span></a>
             <nav>
                 <a href="blog.html">Blog</a>
                 <a href="archive.html">Archive</a>
@@ -511,7 +583,7 @@
             <a href="about.html">About</a>
             <a href="index.html">Portfolio</a>
         </div>
-        <p class="footer-copyright"> 2024 Minimal. All rights reserved.</p>
+        <p class="footer-copyright">© 2026 Danny Silva. All rights reserved.</p>
     </footer>
 
     <script>

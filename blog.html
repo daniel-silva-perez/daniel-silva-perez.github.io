@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal. — Thoughtful Writing</title>
+    <title>Danny Silva | Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
@@ -238,6 +238,7 @@
         }
 
         .hero-meta {
+            flex-wrap: wrap;
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -611,6 +612,112 @@
             color: var(--secondary);
         }
 
+        /* Blog UX refresh */
+        :root {
+            --primary: #6c63ff;
+            --primary-hover: #5b52f0;
+            --secondary: #6f7284;
+            --accent: #15151f;
+            --surface: #ffffff;
+            --background: #f6f7fb;
+            --border: #e2e5ee;
+            --radius: 10px;
+            --shadow-sm: 0 1px 2px rgba(21, 21, 31, 0.04);
+            --shadow-md: 0 14px 34px rgba(21, 21, 31, 0.1);
+            --shadow-lg: 0 24px 60px rgba(21, 21, 31, 0.14);
+        }
+
+        body {
+            background:
+                linear-gradient(180deg, rgba(108, 99, 255, 0.08), transparent 420px),
+                var(--background);
+        }
+
+        .header-inner {
+            min-height: 72px;
+            gap: 1.5rem;
+        }
+
+        nav {
+            gap: 1.5rem;
+        }
+
+        .btn-subscribe,
+        .newsletter-btn {
+            min-height: 42px;
+        }
+
+        .hero {
+            margin-top: 3rem;
+        }
+
+        .hero-card {
+            display: block;
+            height: min(58vw, 560px);
+            min-height: 420px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to top, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.55) 48%, rgba(10, 10, 15, 0.08) 100%);
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-excerpt {
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .categories-section,
+        .posts-grid,
+        .newsletter-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-chip {
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .post-card {
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .post-card-content {
+            min-height: 286px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-card-excerpt {
+            flex: 1;
+        }
+
+        .post-card-footer {
+            gap: 1rem;
+        }
+
+        .post-card-meta {
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .newsletter-card {
+            border-radius: 18px;
+            background:
+                linear-gradient(135deg, rgba(108, 99, 255, 0.22), rgba(34, 211, 238, 0.1)),
+                #10101a;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .posts-grid {
@@ -619,24 +726,59 @@
         }
 
         @media (max-width: 768px) {
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 1rem 1.25rem;
+            }
+
+            nav {
+                display: flex;
+                width: 100%;
+                gap: 0.5rem;
+                overflow-x: auto;
+                padding-bottom: 0.25rem;
+            }
+
+            nav a {
+                white-space: nowrap;
+                padding: 0.35rem 0;
+            }
+
+            .btn-subscribe {
+                position: absolute;
+                top: 0.9rem;
+                right: 1.25rem;
+                padding: 0.5rem 0.9rem;
+            }
+
+            .hero {
+                margin: 1.5rem auto 3rem;
+                padding: 0 1rem;
+            }
+
             .hero-title {
                 font-size: 1.875rem;
             }
 
             .hero-card {
-                height: 460px;
+                height: auto;
+                min-height: 500px;
             }
 
             .hero-overlay {
-                padding: 2rem;
+                padding: 1.5rem;
+            }
+
+            .hero-meta {
+                align-items: flex-start;
+                gap: 0.5rem 0.75rem;
             }
 
             .posts-grid {
                 grid-template-columns: 1fr;
-            }
-
-            nav {
-                display: none;
+                gap: 1.25rem;
+                padding: 0 1rem;
             }
 
             .newsletter-form {
@@ -654,7 +796,7 @@
 
     <header>
         <div class="header-inner">
-            <a href="blog.html" class="logo">Minimal<span>.</span></a>
+            <a href="blog.html" class="logo">Danny<span>.</span></a>
             <nav>
                 <a href="blog.html" class="active">Blog</a>
                 <a href="archive.html">Archive</a>
@@ -872,7 +1014,7 @@
             <a href="about.html">About</a>
             <a href="index.html">Portfolio</a>
         </div>
-        <p class="footer-copyright"> 2024 Minimal. All rights reserved.</p>
+        <p class="footer-copyright">© 2026 Danny Silva. All rights reserved.</p>
     </footer>
 
     <script>
