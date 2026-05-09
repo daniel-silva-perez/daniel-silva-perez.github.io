@@ -286,21 +286,39 @@
             section{padding:4rem 1.25rem}
         }
 
-        /* Accessibility: Focus States */
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible,
-        textarea:focus-visible {
-            outline: 2px solid var(--accent2);
-            outline-offset: 3px;
-            border-radius: 4px;
-        /* Page Load Fade Animation */
-        @keyframes pageLoadFade {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(20px) scale(0.9);
+            transition: all 0.3s ease;
+            z-index: 99;
+            pointer-events: none;
         }
-        body {
-            animation: pageLoadFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+        }
+        .back-to-top:hover {
+            background: var(--bg2);
+            transform: translateY(-2px);
         }
     </style>
     <link rel="stylesheet" href="magazine.css">
@@ -660,5 +678,23 @@ document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
 });
 </script>
+    <button class="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+    <script>
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
