@@ -614,6 +614,7 @@ nav.scrolled{padding:.6rem 2rem}
 /* ── SHARED COMPONENTS ── */
 /* ── SECTIONS ── */
 section{padding:6rem 2rem}
+.about-section{padding-top:1rem}
 .section-header{text-align:center;margin-bottom:4rem}
 .section-header h2{ font-size:2.2rem; margin-bottom:.75rem; color:var(--text); }
 .section-label{ display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:.75rem; }
