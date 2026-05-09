@@ -20,7 +20,7 @@ A clean, editorial personal blog for Danny Silva, a software engineer. The desig
 
 | Page | File | Status | Description |
 |------|------|--------|-------------|
-| Home | `index.html` | ✅ Complete | Portfolio landing page |
+| Home | `index.html` | ✅ Complete | Personal notebook landing page |
 | Blog | `blog.html` | ✅ Complete | Blog homepage with hero + posts grid |
 | Archive | `archive.html` | ✅ Complete | All posts with category filtering |
 | Post | `post.html` | ✅ Complete | Individual blog post template |
