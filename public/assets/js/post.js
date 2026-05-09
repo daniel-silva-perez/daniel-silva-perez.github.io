@@ -39,25 +39,3 @@ window.addEventListener('scroll', () => {
         }
     });
 });
-
-// Share Functions
-function shareTwitter(title) {
-    const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent(title || document.title);
-    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
-}
-
-function shareLinkedIn() {
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
-}
-
-function copyLink(event) {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-        const btn = event.currentTarget;
-        const original = btn.innerHTML;
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
-        window.applyCaseMode?.(document.documentElement.getAttribute('data-case') === 'lowercase' ? 'lowercase' : 'regular');
-        setTimeout(() => { btn.innerHTML = original; }, 2000);
-    });
-}

@@ -109,7 +109,7 @@ if (backToTop) {
         }
     };
 
-    const saved = localStorage.getItem('caseMode') === 'lowercase' ? 'lowercase' : 'regular';
+    const saved = localStorage.getItem('caseMode') === 'regular' ? 'regular' : 'lowercase';
     window.applyCaseMode(saved);
 
     caseToggle?.addEventListener('click', () => {
