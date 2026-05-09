@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive — Minimal.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --primary-hover: #1d4ed8;
+            --secondary: #6B7280;
+            --accent: #1A1A1A;
+            --surface: #FFFFFF;
+            --background: #FAFAFA;
+            --border: #E5E7EB;
+            --radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --max-width: 1200px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--accent);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s var(--transition);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 250, 250, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1.125rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .btn-subscribe {
+            background: var(--primary);
+            color: white;
+            padding: 0.625rem 1.375rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.25s var(--transition);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-subscribe:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        /* Archive Hero */
+        .archive-hero {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+        }
+
+        .archive-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .archive-subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.625rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            background: var(--surface);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: all 0.25s var(--transition);
+        }
+
+        .category-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .category-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* Posts List */
+        .archive-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem 6rem;
+        }
+
+        .posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .post-row {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.35s var(--transition);
+            cursor: pointer;
+        }
+
+        .post-row:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+            border-color: transparent;
+        }
+
+        .post-row-image {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 180px;
+        }
+
+        .post-row-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s var(--transition);
+        }
+
+        .post-row:hover .post-row-image img {
+            transform: scale(1.05);
+        }
+
+        .post-row-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .post-row-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-tag {
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+
+        .post-row-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+        }
+
+        .post-row-excerpt {
+            color: var(--secondary);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-row-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, #60a5fa 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .author-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .read-time {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-left: auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .footer-brand span {
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            color: var(--secondary);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-copy {
+            font-size: 0.875rem;
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .archive-hero {
+                padding: 3rem 1.5rem 2rem;
+            }
+            .archive-title {
+                font-size: 2.5rem;
+            }
+            .archive-subtitle {
+                font-size: 1.0625rem;
+            }
+            .post-row {
+                grid-template-columns: 1fr;
+            }
+            .post-row-image {
+                height: 160px;
+            }
+            .footer-inner {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="blog.html" class="logo">Minimal<span>.</span></a>
+            <nav>
+                <a href="blog.html">Home</a>
+                <a href="archive.html" class="active">Archive</a>
+                <a href="about.html">About</a>
+                <a href="#" class="btn-subscribe">Subscribe</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="archive-hero">
+            <h1 class="archive-title">Archive</h1>
+            <p class="archive-subtitle">Every story we've published, organized by topic and time.</p>
+
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">All Posts</button>
+                <button class="category-btn" data-category="travel">Travel</button>
+                <button class="category-btn" data-category="lifestyle">Lifestyle</button>
+                <button class="category-btn" data-category="technology">Technology</button>
+                <button class="category-btn" data-category="books">Books</button>
+                <button class="category-btn" data-category="design">Design</button>
+            </div>
+        </section>
+
+        <section class="archive-content">
+            <div class="posts-list">
+                <article class="post-row" data-category="travel">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop" alt="Swiss Alps">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Travel</span>
+                            <span class="post-date">May 5, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Finding Solitude in the Swiss Alps</h3>
+                        <p class="post-row-excerpt">Three weeks of hiking through pristine wilderness taught me more about silence than a decade of meditation.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">EF</div>
+                            <span class="author-name">Elena Fischer</span>
+                            <span class="read-time">6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="lifestyle">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop" alt="Coffee">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Lifestyle</span>
+                            <span class="post-date">May 2, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">The Ritual of Morning Coffee</h3>
+                        <p class="post-row-excerpt">Why the simplest routines often hold the deepest meaning, and how to make every cup count.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">MC</div>
+                            <span class="author-name">Marcus Chen</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="technology">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Digital">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Technology</span>
+                            <span class="post-date">April 28, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Reclaiming Focus in the Digital Age</h3>
+                        <p class="post-row-excerpt">A practical guide to building a more intentional relationship with our devices.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">SO</div>
+                            <span class="author-name">Sarah Okonkwo</span>
+                            <span class="read-time">8 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="books">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0a2429b89?w=600&h=400&fit=crop" alt="Books">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Books</span>
+                            <span class="post-date">April 22, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Why I Stopped Chasing Productivity</h3>
+                        <p class="post-row-excerpt">The life-changing book that shifted my entire worldview and what it taught me about rest.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">JM</div>
+                            <span class="author-name">James Mitchell</span>
+                            <span class="read-time">7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="travel">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="Portugal">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Travel</span>
+                            <span class="post-date">April 18, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Lessons from the Portuguese Coast</h3>
+                        <p class="post-row-excerpt">Wandering through Lisbon and Porto, discovering the beauty of impermanence.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">AR</div>
+                            <span class="author-name">Ana Rodriguez</span>
+                            <span class="read-time">6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="design">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1516245834210-c4c1427878cc?w=600&h=400&fit=crop" alt="Workspace">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Design</span>
+                            <span class="post-date">April 14, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Designing Spaces for Mental Clarity</h3>
+                        <p class="post-row-excerpt">How the objects we surround ourselves with shape our inner state and creative output.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">LH</div>
+                            <span class="author-name">Lena Hoffmann</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <a href="blog.html" class="footer-brand">Minimal<span>.</span></a>
+            <div class="footer-links">
+                <a href="blog.html">Home</a>
+                <a href="archive.html">Archive</a>
+                <a href="about.html">About</a>
+                <a href="#">RSS</a>
+                <a href="mailto:hello@minimal.blog">Contact</a>
+            </div>
+            <p class="footer-copy">© 2026 Minimal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const postRows = document.querySelectorAll('.post-row');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+
+                postRows.forEach(post => {
+                    if (category === 'all' || post.dataset.category === category) {
+                        post.style.display = 'grid';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
