@@ -383,3 +383,9 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* Selection Color */
+::selection {
+    background: rgba(91, 75, 255, 0.2) !important;
+    color: var(--ink) !important;
+}
