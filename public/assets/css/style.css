@@ -612,11 +612,6 @@ nav.scrolled{padding:.6rem 2rem}
 .philosophy-icon svg { width: 28px; height: 28px; color: white; }
 
 /* ── SHARED COMPONENTS ── */
-.stats{ display:flex;justify-content:center;gap:3rem; margin-top:4rem;flex-wrap:wrap; }
-.stat{text-align:center}
-.stat-num{font-size:2rem;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
-.stat-label{font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem}
-
 /* ── SECTIONS ── */
 section{padding:6rem 2rem}
 .section-header{text-align:center;margin-bottom:4rem}
@@ -744,8 +739,6 @@ footer{ text-align:center;padding:4rem 2rem; border-top:1px solid var(--border);
     .section-header { margin-bottom: 2.5rem; }
     .section-header h2 { font-size: 1.75rem; }
     .about-content p { font-size: 1rem; }
-    .stats { gap: 1.5rem; margin-top: 3rem; }
-    .stat { flex: 1 1 120px; }
     footer { padding: 3rem 1.5rem 5rem; }
     .footer-links { flex-direction: column; gap: 1rem; align-items: center; }
     .back-to-top { width: 44px; height: 44px; right: 1rem; bottom: 1rem; }
