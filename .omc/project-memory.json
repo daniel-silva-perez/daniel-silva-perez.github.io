@@ -1,0 +1,71 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1778288935185,
+  "projectRoot": "/home/daniel/daniel-silva-perez.github.io",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {},
+  "hotPaths": [
+    {
+      "path": "blog.html",
+      "accessCount": 3,
+      "lastAccessed": 1778290795843,
+      "type": "file"
+    },
+    {
+      "path": ".stitch/DESIGN.md",
+      "accessCount": 2,
+      "lastAccessed": 1778290582496,
+      "type": "file"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 1,
+      "lastAccessed": 1778290827668,
+      "type": "file"
+    },
+    {
+      "path": "archive.html",
+      "accessCount": 1,
+      "lastAccessed": 1778291105467,
+      "type": "file"
+    },
+    {
+      "path": "post.html",
+      "accessCount": 1,
+      "lastAccessed": 1778291105935,
+      "type": "file"
+    },
+    {
+      "path": "about.html",
+      "accessCount": 1,
+      "lastAccessed": 1778291106540,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
