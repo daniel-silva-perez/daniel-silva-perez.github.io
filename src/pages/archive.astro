@@ -30,7 +30,7 @@ const categories = [...new Set(posts.map((p) => p.data.category).filter(Boolean)
                 {posts.map((post) => (
                 <article class="post-row" data-category={post.data.category?.toLowerCase()} onclick={`location.href='/blog/${post.slug}'`}>
                     <div class="post-row-image">
-                        {post.data.heroImage && <img src={post.data.heroImage} alt={post.data.title}>}
+                        {post.data.heroImage && <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async">}
                     </div>
                     <div class="post-row-content">
                         <div class="post-row-meta">
