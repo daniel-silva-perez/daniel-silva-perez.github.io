@@ -177,14 +177,6 @@ nav.scrolled{padding:.6rem 2rem}
     border:1px solid var(--border);
 }
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);text-decoration:none}
-.btn-subscribe {
-    background: var(--accent);
-    color: white;
-    padding: 0.5rem 1.25rem;
-    border-radius: 8px;
-    font-size: 0.875rem;
-    font-weight: 600;
-}
 
 /* ── HERO (HOMEPAGE) ── */
 .hero{
@@ -538,20 +530,6 @@ nav.scrolled{padding:.6rem 2rem}
 .philosophy-icon svg { width: 28px; height: 28px; color: white; }
 
 /* ── SHARED COMPONENTS ── */
-.newsletter-card {
-    max-width: var(--max-width);
-    margin: 4rem auto;
-    padding: 4rem 3rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    text-align: center;
-}
-.newsletter-form { display: flex; gap: 1rem; max-width: 500px; margin: 2rem auto 0; }
-.newsletter-input { flex: 1; padding: 1rem 1.5rem; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); color: var(--text); font-size: 1rem; outline: none; transition: border-color 0.2s; }
-.newsletter-input:focus { border-color: var(--accent); }
-
-/* ── STATS ── */
 .stats{ display:flex;justify-content:center;gap:3rem; margin-top:4rem;flex-wrap:wrap; }
 .stat{text-align:center}
 .stat-num{font-size:2rem;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
@@ -634,9 +612,6 @@ footer{ text-align:center;padding:4rem 2rem; border-top:1px solid var(--border);
     .about-image img { height: 350px; }
     .about-intro h1 { font-size: 2.2rem; }
     .philosophy-grid { grid-template-columns: 1fr; padding: 0 1.5rem; }
-
-    .newsletter-card { padding: 3rem 1.5rem; margin: 2rem 1rem; }
-    .newsletter-form { flex-direction: column; }
 
     section { padding: 4rem 1.25rem; }
     .stats { gap: 1.5rem; }

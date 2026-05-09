@@ -31,39 +31,69 @@
   "directoryMap": {},
   "hotPaths": [
     {
+      "path": "index.html",
+      "accessCount": 10,
+      "lastAccessed": 1778331511601,
+      "type": "file"
+    },
+    {
       "path": "blog.html",
-      "accessCount": 3,
-      "lastAccessed": 1778290795843,
-      "type": "file"
-    },
-    {
-      "path": ".stitch/DESIGN.md",
-      "accessCount": 2,
-      "lastAccessed": 1778290582496,
-      "type": "file"
-    },
-    {
-      "path": "README.md",
-      "accessCount": 1,
-      "lastAccessed": 1778290827668,
-      "type": "file"
-    },
-    {
-      "path": "archive.html",
-      "accessCount": 1,
-      "lastAccessed": 1778291105467,
+      "accessCount": 7,
+      "lastAccessed": 1778330377060,
       "type": "file"
     },
     {
       "path": "post.html",
-      "accessCount": 1,
-      "lastAccessed": 1778291105935,
+      "accessCount": 4,
+      "lastAccessed": 1778330494433,
       "type": "file"
     },
     {
       "path": "about.html",
+      "accessCount": 4,
+      "lastAccessed": 1778330558313,
+      "type": "file"
+    },
+    {
+      "path": "archive.html",
+      "accessCount": 4,
+      "lastAccessed": 1778330630823,
+      "type": "file"
+    },
+    {
+      "path": ".stitch/DESIGN.md",
+      "accessCount": 3,
+      "lastAccessed": 1778327933191,
+      "type": "file"
+    },
+    {
+      "path": "tags.html",
+      "accessCount": 3,
+      "lastAccessed": 1778330707293,
+      "type": "file"
+    },
+    {
+      "path": "404.html",
+      "accessCount": 3,
+      "lastAccessed": 1778330745674,
+      "type": "file"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 3,
+      "lastAccessed": 1778331012435,
+      "type": "file"
+    },
+    {
+      "path": "magazine.css",
+      "accessCount": 2,
+      "lastAccessed": 1778327936190,
+      "type": "file"
+    },
+    {
+      "path": ".stitch/SITE.md",
       "accessCount": 1,
-      "lastAccessed": 1778291106540,
+      "lastAccessed": 1778327939583,
       "type": "file"
     }
   ],

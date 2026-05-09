@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive — Danny Silva | Blog</title>
+    <script>
+      (function() {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f7f3eb;
+            --surface: #f0ead9;
+            --text: #1c1714;
+            --text-muted: #6b5e54;
+            --accent: #c0603a;
+            --border: #ddd5c4;
+            --card-shadow: 0 2px 8px rgba(28,23,20,0.08);
+            --heading-font: 'Lora', Georgia, serif;
+            --heading-weight: 700;
+            --heading-tracking: 0;
+            --image-filter: none;
+            --selection-bg: rgba(192,96,58,0.2);
+            --nav-bg: rgba(247,243,235,0.92);
+            --code-bg: #ede8df;
+            --code-text: #1c1714;
+            --scrollbar-thumb: #ddd5c4;
+            --blockquote-border: #c0603a;
+            --radius: 10px;
+            --shadow-sm: 0 1px 3px rgba(28,23,20,0.06);
+            --shadow-md: 0 4px 16px rgba(28,23,20,0.1);
+            --max-width: 1200px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #08080b;
+            --surface: #111114;
+            --text: #ebe6db;
+            --text-muted: #888073;
+            --accent: #f5a623;
+            --border: rgba(255,255,255,0.06);
+            --card-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+            --heading-font: 'Inter', sans-serif;
+            --heading-weight: 300;
+            --heading-tracking: -0.02em;
+            --image-filter: saturate(0.8) brightness(0.92);
+            --selection-bg: rgba(245,166,35,0.3);
+            --nav-bg: rgba(8,8,11,0.8);
+            --code-bg: #111114;
+            --code-text: #f5a623;
+            --scrollbar-thumb: rgba(255,255,255,0.1);
+            --blockquote-border: #f5a623;
+            --shadow-sm: 0 0 0 1px rgba(255,255,255,0.05);
+            --shadow-md: 0 0 0 1px rgba(255,255,255,0.06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #08080b;
+                --surface: #111114;
+                --text: #ebe6db;
+                --text-muted: #888073;
+                --accent: #f5a623;
+                --border: rgba(255,255,255,0.06);
+                --card-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+                --heading-font: 'Inter', sans-serif;
+                --heading-weight: 300;
+                --heading-tracking: -0.02em;
+                --image-filter: saturate(0.8) brightness(0.92);
+                --selection-bg: rgba(245,166,35,0.3);
+                --nav-bg: rgba(8,8,11,0.8);
+                --code-bg: #111114;
+                --code-text: #f5a623;
+                --scrollbar-thumb: rgba(255,255,255,0.1);
+                --blockquote-border: #f5a623;
+                --shadow-sm: 0 0 0 1px rgba(255,255,255,0.05);
+                --shadow-md: 0 0 0 1px rgba(255,255,255,0.06);
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--selection-bg); color: var(--text); }
+
+        h1, h2, h3, h4 {
+            font-family: var(--heading-font);
+            font-weight: var(--heading-weight);
+            letter-spacing: var(--heading-tracking);
+            line-height: 1.15;
+            color: var(--text);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s var(--transition);
+        }
+
+        img { filter: var(--image-filter); }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            min-height: 72px;
+            gap: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s var(--transition);
+        }
+
+        nav a:hover { color: var(--text); }
+        nav a:hover::after { width: 100%; }
+        nav a.active { color: var(--text); }
+        nav a.active::after { width: 100%; }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 8px;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
+            :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: block; }
+        }
+
+        .btn-subscribe {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.25s var(--transition);
+        }
+
+        .btn-subscribe:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* Archive Hero */
+        .archive-hero {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+        }
+
+        .archive-title {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .archive-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-btn {
+            padding: 0.625rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.25s var(--transition);
+            min-height: 42px;
+            font-family: inherit;
+        }
+
+        .category-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        .category-btn.active {
+            background: var(--text);
+            border-color: var(--text);
+            color: var(--bg);
+        }
+
+        /* Posts List */
+        .archive-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem 6rem;
+        }
+
+        .posts-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .post-row {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.35s var(--transition);
+            cursor: pointer;
+        }
+
+        .post-row:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .post-row-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 180px;
+        }
+
+        .post-row-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s var(--transition);
+        }
+
+        .post-row:hover .post-row-image img { transform: scale(1.05); }
+
+        .post-row-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .post-row-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-tag {
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .post-tag.tech-label { color: var(--text-muted); }
+
+        .post-date { font-size: 0.8rem; color: var(--text-muted); }
+
+        .post-row-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.25;
+        }
+
+        .post-row-excerpt {
+            color: var(--text-muted);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-row-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .author-name { font-size: 0.875rem; font-weight: 600; color: var(--text); }
+
+        .read-time { font-size: 0.8rem; color: var(--text-muted); margin-left: auto; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+            background: var(--surface);
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text);
+        }
+
+        .footer-brand span { color: var(--accent); }
+
+        .footer-links { display: flex; gap: 2rem; }
+
+        .footer-links a { font-size: 0.875rem; color: var(--text-muted); }
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-copy { font-size: 0.875rem; color: var(--text-muted); }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 1rem 1.25rem;
+            }
+
+            nav {
+                display: flex;
+                width: 100%;
+                gap: 0.5rem;
+                overflow-x: auto;
+                padding-bottom: 0.25rem;
+            }
+
+            nav a { white-space: nowrap; padding: 0.35rem 0; }
+
+            .btn-subscribe {
+                position: absolute;
+                top: 0.9rem;
+                right: 1.25rem;
+                padding: 0.5rem 0.9rem;
+            }
+
+            .archive-hero { padding: 3rem 1.5rem 2rem; }
+            .archive-subtitle { font-size: 1.0625rem; }
+
+            .post-row { grid-template-columns: 1fr; padding: 1rem; }
+            .post-row-image { height: 160px; }
+
+            .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="blog.html" class="logo">Danny<span>.</span></a>
+            <nav>
+                <a href="blog.html">Writing</a>
+                <a href="archive.html" class="active">Archive</a>
+                <a href="tags.html">Tags</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Home</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </nav>
+            <a href="blog.html#newsletter" class="btn-subscribe">Subscribe</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="archive-hero">
+            <h1 class="archive-title">Archive</h1>
+            <p class="archive-subtitle">Life, notes, essays, travel, books, and a few tech things when they are worth writing down.</p>
+
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">All Posts</button>
+                <button class="category-btn" data-category="life">Life</button>
+                <button class="category-btn" data-category="notes">Notes</button>
+                <button class="category-btn" data-category="essays">Essays</button>
+                <button class="category-btn" data-category="travel">Travel</button>
+                <button class="category-btn" data-category="books">Books</button>
+                <button class="category-btn" data-category="tech">Tech</button>
+            </div>
+        </section>
+
+        <section class="archive-content">
+            <div class="posts-list">
+                <article class="post-row" data-category="life" onclick="location.href='post.html'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop" alt="Coffee">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Life</span>
+                            <span class="post-date">May 5, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">The Ritual of Morning Coffee</h3>
+                        <p class="post-row-excerpt">Why the simplest routines often hold the deepest meaning, and how to make every cup count.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="notes" onclick="location.href='post.html'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=400&fit=crop" alt="Notebook">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Notes</span>
+                            <span class="post-date">May 2, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Small Things I Keep Coming Back To</h3>
+                        <p class="post-row-excerpt">A running list of habits, objects, places, and ideas that keep making ordinary days better.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="essays" onclick="location.href='post.html'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop" alt="Notebook">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Essays</span>
+                            <span class="post-date">April 28, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">On Letting a Year Be Uneven</h3>
+                        <p class="post-row-excerpt">Some seasons are for output, some are for repair, and some only make sense in hindsight.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="books" onclick="location.href='post.html'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1542831371-29b0a2429b89?w=600&h=400&fit=crop" alt="Books">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Books</span>
+                            <span class="post-date">April 22, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Books That Made Me Less Restless</h3>
+                        <p class="post-row-excerpt">A few reads that changed how I think about ambition, patience, and attention.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">7 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="travel" onclick="location.href='post.html'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop" alt="Portugal">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Travel</span>
+                            <span class="post-date">April 18, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Lessons from the Portuguese Coast</h3>
+                        <p class="post-row-excerpt">Wandering through Lisbon and Porto, discovering the beauty of impermanence.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">6 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="tech" onclick="location.href='post.html'">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="Code editor">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag tech-label">Tech</span>
+                            <span class="post-date">April 14, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">The Future of AI-Assisted Development</h3>
+                        <p class="post-row-excerpt">A quieter technical note on how language models are changing the way software gets made.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">5 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <a href="blog.html" class="footer-brand">Danny<span>.</span></a>
+            <div class="footer-links">
+                <a href="blog.html">Writing</a>
+                <a href="archive.html">Archive</a>
+                <a href="tags.html">Tags</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Home</a>
+                <a href="mailto:danielsp-recruiter-inquiries@outlook.com">Contact</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Danny Silva. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <script>
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const postRows = document.querySelectorAll('.post-row');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+
+                postRows.forEach(post => {
+                    if (category === 'all' || post.dataset.category === category) {
+                        post.style.display = 'grid';
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Theme toggle
+        (function() {
+            const root = document.documentElement;
+            const saved = localStorage.getItem('theme');
+            if (saved) root.setAttribute('data-theme', saved);
+            document.getElementById('themeToggle')?.addEventListener('click', function() {
+                const current = root.getAttribute('data-theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                let next;
+                if (!current) next = systemDark ? 'light' : 'dark';
+                else if (current === 'dark') next = 'light';
+                else next = 'dark';
+                root.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Danny Silva | Personal Notebook</title>
+    <script>
+      (function() {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f7f3eb;
+            --surface: #f0ead9;
+            --text: #1c1714;
+            --text-muted: #6b5e54;
+            --accent: #c0603a;
+            --border: #ddd5c4;
+            --card-shadow: 0 2px 8px rgba(28,23,20,0.08);
+            --heading-font: 'Lora', Georgia, serif;
+            --heading-weight: 700;
+            --heading-tracking: 0;
+            --image-filter: none;
+            --selection-bg: rgba(192,96,58,0.2);
+            --nav-bg: rgba(247,243,235,0.92);
+            --code-bg: #ede8df;
+            --code-text: #1c1714;
+            --scrollbar-thumb: #ddd5c4;
+            --blockquote-border: #c0603a;
+            --radius: 12px;
+            --shadow-sm: 0 1px 3px rgba(28,23,20,0.06);
+            --shadow-md: 0 4px 16px rgba(28,23,20,0.1);
+            --max-width: 1200px;
+            --content-width: 720px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #08080b;
+            --surface: #111114;
+            --text: #ebe6db;
+            --text-muted: #888073;
+            --accent: #f5a623;
+            --border: rgba(255,255,255,0.06);
+            --card-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+            --heading-font: 'Inter', sans-serif;
+            --heading-weight: 300;
+            --heading-tracking: -0.02em;
+            --image-filter: saturate(0.8) brightness(0.92);
+            --selection-bg: rgba(245,166,35,0.3);
+            --nav-bg: rgba(8,8,11,0.8);
+            --code-bg: #111114;
+            --code-text: #f5a623;
+            --scrollbar-thumb: rgba(255,255,255,0.1);
+            --blockquote-border: #f5a623;
+            --shadow-sm: 0 0 0 1px rgba(255,255,255,0.05);
+            --shadow-md: 0 0 0 1px rgba(255,255,255,0.06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #08080b;
+                --surface: #111114;
+                --text: #ebe6db;
+                --text-muted: #888073;
+                --accent: #f5a623;
+                --border: rgba(255,255,255,0.06);
+                --card-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+                --heading-font: 'Inter', sans-serif;
+                --heading-weight: 300;
+                --heading-tracking: -0.02em;
+                --image-filter: saturate(0.8) brightness(0.92);
+                --selection-bg: rgba(245,166,35,0.3);
+                --nav-bg: rgba(8,8,11,0.8);
+                --code-bg: #111114;
+                --code-text: #f5a623;
+                --scrollbar-thumb: rgba(255,255,255,0.1);
+                --blockquote-border: #f5a623;
+                --shadow-sm: 0 0 0 1px rgba(255,255,255,0.05);
+                --shadow-md: 0 0 0 1px rgba(255,255,255,0.06);
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--selection-bg); color: var(--text); }
+
+        h1, h2, h3, h4 {
+            font-family: var(--heading-font);
+            font-weight: var(--heading-weight);
+            letter-spacing: var(--heading-tracking);
+            line-height: 1.2;
+            color: var(--text);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s var(--transition);
+        }
+
+        img { filter: var(--image-filter); }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            min-height: 72px;
+            gap: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s var(--transition);
+        }
+
+        nav a:hover { color: var(--text); }
+        nav a:hover::after { width: 100%; }
+        nav a.active { color: var(--text); }
+        nav a.active::after { width: 100%; }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 8px;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
+            :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: block; }
+        }
+
+        .btn-subscribe {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.25s var(--transition);
+        }
+
+        .btn-subscribe:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* About Hero */
+        .about-hero {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image { position: relative; }
+
+        .about-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            display: block;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 3px solid var(--accent);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .about-intro h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .about-intro h1 span { color: var(--accent); }
+
+        .about-text {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        .about-text p { margin-bottom: 1.25rem; }
+
+        /* Philosophy Section */
+        .philosophy {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 4rem 2rem 6rem;
+        }
+
+        .philosophy-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .philosophy-card {
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .philosophy-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .philosophy-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+            stroke: white;
+        }
+
+        .philosophy-card h3 { font-size: 1.125rem; margin-bottom: 0.75rem; }
+
+        .philosophy-card p { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.6; }
+
+        /* Contact Section */
+        .contact {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 4rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .contact-text {
+            color: var(--text-muted);
+            font-size: 1.0625rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.0625rem;
+            font-weight: 500;
+            transition: all 0.25s var(--transition);
+            position: relative;
+        }
+
+        .contact-email:hover { border-color: var(--accent); color: var(--accent); }
+
+        .contact-email svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+            background: var(--surface);
+            margin-top: 6rem;
+        }
+
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text);
+        }
+
+        .footer-brand span { color: var(--accent); }
+
+        .footer-links { display: flex; gap: 2rem; }
+
+        .footer-links a { font-size: 0.875rem; color: var(--text-muted); }
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-copy { font-size: 0.875rem; color: var(--text-muted); }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-hero {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            .about-image { order: -1; max-width: 400px; margin: 0 auto; }
+            .about-image::after { display: none; }
+            .about-intro h1 { font-size: 2.5rem; }
+            .philosophy-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner { padding: 1rem 1.5rem; }
+            nav a:not(.btn-subscribe) { display: none; }
+            .about-hero { padding: 3rem 1.5rem; }
+            .about-intro h1 { font-size: 2rem; }
+            .about-text { font-size: 1rem; }
+            .contact { margin: 0 1.5rem; padding: 2.5rem 2rem; }
+            .contact-title { font-size: 1.5rem; }
+            .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="blog.html" class="logo">Danny<span>.</span></a>
+            <nav>
+                <a href="blog.html">Writing</a>
+                <a href="archive.html">Archive</a>
+                <a href="tags.html">Tags</a>
+                <a href="about.html" class="active">About</a>
+                <a href="index.html">Home</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </nav>
+            <a href="blog.html#newsletter" class="btn-subscribe">Subscribe</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-hero">
+            <div class="about-image">
+                <img src="assets/danny.png" alt="Author portrait">
+            </div>
+            <div class="about-intro">
+                <h1>Writing about the things that <span>matter most</span></h1>
+                <div class="about-text">
+                    <p>Hey, I'm Danny. This is my personal notebook—an esoteric journal where I document what I am learning in life, my daily curiosities, what works, and what doesn't.</p>
+                    <p>I am an autodidact who believes life is an everlasting learning journey. Right now, much of my focus is on the deficit of attention and how we navigate it. While I occasionally write about tech, this space is decidedly broader. It is a place to slow down, notice patterns, and think in public.</p>
+                    <p>This notebook exists primarily as a personal record for posterity, but I share it openly for anyone who might find value in the reflections along the way.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="philosophy">
+            <h3 class="philosophy-title">What I Believe</h3>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>Intentional Slowth</h3>
+                    <p>Not all productivity is created equal. I believe in doing fewer things, but doing them with more presence, depth, and satisfaction.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Design for Living</h3>
+                    <p>The spaces we inhabit shape our minds. I write about how thoughtful design — in our homes, our tools, our routines — can create room for clarity.</p>
+                </div>
+
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Words Matter</h3>
+                    <p>We're drowning in content but starving for meaning. Each essay here is written to be savored, not skimmed — a small act of resistance against the attention economy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="philosophy">
+            <div class="contact">
+                <h2 class="contact-title">Let's Connect</h2>
+                <p class="contact-text">Interested in collaborating or just want to say hello? I'd love to hear from you.</p>
+                <a href="mailto:danielsp-recruiter-inquiries@outlook.com" class="contact-email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M22 7l-10 6L2 7"/>
+                    </svg>
+                    danielsp-recruiter-inquiries@outlook.com
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <a href="blog.html" class="footer-brand">Danny<span>.</span></a>
+            <div class="footer-links">
+                <a href="blog.html">Writing</a>
+                <a href="archive.html">Archive</a>
+                <a href="tags.html">Tags</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Home</a>
+                <a href="mailto:danielsp-recruiter-inquiries@outlook.com">Contact</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Danny Silva. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <script>
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Theme toggle
+        (function() {
+            const root = document.documentElement;
+            const saved = localStorage.getItem('theme');
+            if (saved) root.setAttribute('data-theme', saved);
+            document.getElementById('themeToggle')?.addEventListener('click', function() {
+                const current = root.getAttribute('data-theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                let next;
+                if (!current) next = systemDark ? 'light' : 'dark';
+                else if (current === 'dark') next = 'light';
+                else next = 'dark';
+                root.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        })();
+    </script>
+</body>
+</html>

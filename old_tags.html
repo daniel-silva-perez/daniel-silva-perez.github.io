@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags — Danny Silva | Blog</title>
+    <script>
+      (function() {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f7f3eb;
+            --surface: #f0ead9;
+            --text: #1c1714;
+            --text-muted: #6b5e54;
+            --accent: #c0603a;
+            --border: #ddd5c4;
+            --card-shadow: 0 2px 8px rgba(28,23,20,0.08);
+            --heading-font: 'Lora', Georgia, serif;
+            --heading-weight: 700;
+            --heading-tracking: 0;
+            --image-filter: none;
+            --selection-bg: rgba(192,96,58,0.2);
+            --nav-bg: rgba(247,243,235,0.92);
+            --code-bg: #ede8df;
+            --code-text: #1c1714;
+            --scrollbar-thumb: #ddd5c4;
+            --blockquote-border: #c0603a;
+            --radius: 10px;
+            --shadow-sm: 0 1px 3px rgba(28,23,20,0.06);
+            --shadow-md: 0 4px 16px rgba(28,23,20,0.1);
+            --max-width: 1200px;
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #08080b;
+            --surface: #111114;
+            --text: #ebe6db;
+            --text-muted: #888073;
+            --accent: #f5a623;
+            --border: rgba(255,255,255,0.06);
+            --card-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+            --heading-font: 'Inter', sans-serif;
+            --heading-weight: 300;
+            --heading-tracking: -0.02em;
+            --image-filter: saturate(0.8) brightness(0.92);
+            --selection-bg: rgba(245,166,35,0.3);
+            --nav-bg: rgba(8,8,11,0.8);
+            --code-bg: #111114;
+            --code-text: #f5a623;
+            --scrollbar-thumb: rgba(255,255,255,0.1);
+            --blockquote-border: #f5a623;
+            --shadow-sm: 0 0 0 1px rgba(255,255,255,0.05);
+            --shadow-md: 0 0 0 1px rgba(255,255,255,0.06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #08080b;
+                --surface: #111114;
+                --text: #ebe6db;
+                --text-muted: #888073;
+                --accent: #f5a623;
+                --border: rgba(255,255,255,0.06);
+                --card-shadow: 0 0 0 1px rgba(255,255,255,0.05);
+                --heading-font: 'Inter', sans-serif;
+                --heading-weight: 300;
+                --heading-tracking: -0.02em;
+                --image-filter: saturate(0.8) brightness(0.92);
+                --selection-bg: rgba(245,166,35,0.3);
+                --nav-bg: rgba(8,8,11,0.8);
+                --code-bg: #111114;
+                --code-text: #f5a623;
+                --scrollbar-thumb: rgba(255,255,255,0.1);
+                --blockquote-border: #f5a623;
+                --shadow-sm: 0 0 0 1px rgba(255,255,255,0.05);
+                --shadow-md: 0 0 0 1px rgba(255,255,255,0.06);
+            }
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background: var(--selection-bg); color: var(--text); }
+
+        h1, h2, h3, h4 {
+            font-family: var(--heading-font);
+            font-weight: var(--heading-weight);
+            letter-spacing: var(--heading-tracking);
+            line-height: 1.15;
+            color: var(--text);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s var(--transition);
+        }
+
+        img { filter: var(--image-filter); }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            min-height: 72px;
+            gap: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--heading-font);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s var(--transition);
+        }
+
+        nav a:hover { color: var(--text); }
+        nav a:hover::after { width: 100%; }
+        nav a.active { color: var(--text); }
+        nav a.active::after { width: 100%; }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 8px;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
+            :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: block; }
+        }
+
+        .btn-subscribe {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.25s var(--transition);
+        }
+
+        .btn-subscribe:hover { opacity: 0.9; transform: translateY(-2px); }
+
+        /* Tags Hero */
+        .tags-hero {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 5rem 2rem 3rem;
+            text-align: center;
+        }
+
+        .tags-title {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .tags-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Search */
+        .search-container {
+            max-width: 480px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 2.75rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+            color: var(--text);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input::placeholder { color: var(--text-muted); }
+
+        .search-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(192,96,58,0.1);
+        }
+
+        [data-theme="dark"] .search-input:focus,
+        .search-input:focus {
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* Tag Cloud */
+        .tag-cloud {
+            max-width: var(--max-width);
+            margin: 0 auto 4rem;
+            padding: 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s var(--transition);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text);
+            font-family: inherit;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tag:hover { transform: translateY(-3px); border-color: var(--accent); color: var(--accent); }
+
+        .tag.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .tag-count {
+            font-size: 0.8125rem;
+            padding: 0.125rem 0.5rem;
+            border-radius: 100px;
+            background: var(--bg);
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .tag.active .tag-count {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        /* Tag sizes based on popularity */
+        .tag-size-1 { font-size: 0.875rem; }
+        .tag-size-2 { font-size: 0.9375rem; }
+        .tag-size-3 { font-size: 1.0625rem; }
+        .tag-size-4 { font-size: 1.1875rem; }
+        .tag-size-5 { font-size: 1.3125rem; }
+
+        /* Tagged Posts Section */
+        .tagged-posts {
+            max-width: var(--max-width);
+            margin: 0 auto 5rem;
+            padding: 0 2rem;
+            display: none;
+        }
+
+        .tagged-posts.visible { display: block; }
+
+        .tagged-posts-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tagged-posts-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .tagged-post-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tagged-post-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+
+        .tagged-post-image { height: 180px; overflow: hidden; }
+
+        .tagged-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s var(--transition);
+        }
+
+        .tagged-post-card:hover .tagged-post-image img { transform: scale(1.05); }
+
+        .tagged-post-content { padding: 1.25rem; }
+
+        .tagged-post-category {
+            display: inline-block;
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagged-post-title { font-size: 1.0625rem; line-height: 1.35; color: var(--text); }
+
+        .tagged-post-meta { font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a { font-size: 0.9rem; color: var(--text-muted); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-copyright { font-size: 0.875rem; color: var(--text-muted); }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .tagged-posts-list { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 1rem 1.25rem;
+            }
+
+            nav {
+                display: flex;
+                width: 100%;
+                gap: 0.5rem;
+                overflow-x: auto;
+                padding-bottom: 0.25rem;
+            }
+
+            nav a { white-space: nowrap; padding: 0.35rem 0; }
+
+            .btn-subscribe {
+                position: absolute;
+                top: 0.9rem;
+                right: 1.25rem;
+                padding: 0.5rem 0.9rem;
+            }
+
+            .tags-hero { padding: 3rem 1.25rem 2rem; }
+            .tag-cloud { gap: 0.75rem; padding: 0 1rem; }
+            .tag { padding: 0.625rem 1rem; }
+            .tagged-posts-list { grid-template-columns: 1fr; }
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="blog.html" class="logo">Danny<span>.</span></a>
+            <nav>
+                <a href="blog.html">Writing</a>
+                <a href="archive.html">Archive</a>
+                <a href="tags.html" class="active">Tags</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Home</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </nav>
+            <a href="blog.html#newsletter" class="btn-subscribe">Subscribe</a>
+        </div>
+    </header>
+
+    <section class="tags-hero">
+        <h1 class="tags-title">Tags</h1>
+        <p class="tags-subtitle">Life, notes, essays, travel, books, and the occasional tech thing.</p>
+        <div class="search-container">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" class="search-input" id="tagSearch" placeholder="Search tags...">
+        </div>
+    </section>
+
+    <section class="tag-cloud" id="tagCloud">
+        <button class="tag tag-size-5" data-tag="Life" onclick="filterByTag(this)">
+            Life
+            <span class="tag-count">8</span>
+        </button>
+        <button class="tag tag-size-4" data-tag="Notes" onclick="filterByTag(this)">
+            Notes
+            <span class="tag-count">11</span>
+        </button>
+        <button class="tag tag-size-4" data-tag="Essays" onclick="filterByTag(this)">
+            Essays
+            <span class="tag-count">10</span>
+        </button>
+        <button class="tag tag-size-3" data-tag="Travel" onclick="filterByTag(this)">
+            Travel
+            <span class="tag-count">5</span>
+        </button>
+        <button class="tag tag-size-3" data-tag="Books" onclick="filterByTag(this)">
+            Books
+            <span class="tag-count">6</span>
+        </button>
+        <button class="tag tag-size-2" data-tag="Writing" onclick="filterByTag(this)">
+            Writing
+            <span class="tag-count">9</span>
+        </button>
+        <button class="tag tag-size-1" data-tag="Health" onclick="filterByTag(this)">
+            Health
+            <span class="tag-count">4</span>
+        </button>
+        <button class="tag tag-size-1" data-tag="Tech" onclick="filterByTag(this)">
+            Tech
+            <span class="tag-count">4</span>
+        </button>
+    </section>
+
+    <section class="tagged-posts" id="taggedPosts">
+        <h2 class="tagged-posts-title" id="taggedPostsTitle">Posts tagged with <span id="activeTagName"></span></h2>
+        <div class="tagged-posts-list" id="taggedPostsList"></div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="blog.html">Writing</a>
+            <a href="archive.html">Archive</a>
+            <a href="tags.html">Tags</a>
+            <a href="about.html">About</a>
+            <a href="index.html">Home</a>
+        </div>
+        <p class="footer-copyright">&copy; 2026 Danny Silva. All rights reserved.</p>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <script>
+        // Tag data
+        const postsByTag = {
+            'Life': [
+                { title: 'The Art of Slow Living', category: 'Life', date: 'Dec 15, 2024', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80' },
+                { title: 'Morning Routines That Actually Work', category: 'Life', date: 'Nov 28, 2024', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80' },
+                { title: 'Digital Detox: A Week Without Screens', category: 'Life', date: 'Oct 20, 2024', image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80' }
+            ],
+            'Notes': [
+                { title: 'Small Things I Keep Coming Back To', category: 'Notes', date: 'May 2, 2026', image: 'https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&q=80' },
+                { title: 'Three Things From This Week', category: 'Notes', date: 'Apr 12, 2026', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80' },
+                { title: 'A Few Notes on Restlessness', category: 'Notes', date: 'Mar 28, 2026', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80' }
+            ],
+            'Essays': [
+                { title: 'On Letting a Year Be Uneven', category: 'Essays', date: 'Apr 28, 2026', image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&q=80' },
+                { title: 'The Art of Slow Living', category: 'Essays', date: 'Dec 15, 2024', image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80' },
+                { title: 'Why I Stopped Chasing Productivity', category: 'Essays', date: 'Oct 25, 2024', image: 'https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=600&q=80' }
+            ],
+            'Books': [
+                { title: 'Books That Made Me Less Restless', category: 'Books', date: 'Apr 22, 2026', image: 'https://images.unsplash.com/photo-1542831371-29b0a2429b89?w=600&q=80' },
+                { title: 'A Novel I Still Think About', category: 'Books', date: 'Mar 18, 2026', image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=80' },
+                { title: 'What I Marked Up This Month', category: 'Books', date: 'Feb 12, 2026', image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&q=80' }
+            ],
+            'Travel': [
+                { title: 'Finding Solitude in the Mountains', category: 'Travel', date: 'Nov 15, 2024', image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80' },
+                { title: 'A Month in Tokyo', category: 'Travel', date: 'Sep 22, 2024', image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80' },
+                { title: 'Hiking the Pacific Crest Trail', category: 'Travel', date: 'Sep 5, 2024', image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80' }
+            ],
+            'Tech': [
+                { title: 'The Future of AI-Assisted Development', category: 'Tech', date: 'Dec 5, 2024', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80' },
+                { title: 'Building Resilient Systems with Rust', category: 'Tech', date: 'Dec 10, 2024', image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80' },
+                { title: 'Reclaiming Focus in the Digital Age', category: 'Tech', date: 'Apr 14, 2026', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80' }
+            ]
+        };
+
+        let activeTag = null;
+
+        function filterByTag(element) {
+            const tag = element.dataset.tag;
+            const postsSection = document.getElementById('taggedPosts');
+            const postsList = document.getElementById('taggedPostsList');
+            const activeTagName = document.getElementById('activeTagName');
+
+            document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+
+            if (activeTag === tag) {
+                activeTag = null;
+                postsSection.classList.remove('visible');
+                return;
+            }
+
+            activeTag = tag;
+            element.classList.add('active');
+
+            const posts = postsByTag[tag] || [];
+            activeTagName.textContent = tag;
+            postsList.innerHTML = posts.map(post => `
+                <article class="tagged-post-card" onclick="location.href='post.html'">
+                    <div class="tagged-post-image">
+                        <img src="${post.image}" alt="${post.title}">
+                    </div>
+                    <div class="tagged-post-content">
+                        <span class="tagged-post-category">${post.category}</span>
+                        <h3 class="tagged-post-title">${post.title}</h3>
+                        <div class="tagged-post-meta">${post.date}</div>
+                    </div>
+                </article>
+            `).join('');
+
+            postsSection.classList.add('visible');
+            postsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Search filter
+        document.getElementById('tagSearch').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.tag').forEach(tag => {
+                const tagName = tag.dataset.tag.toLowerCase();
+                tag.style.display = tagName.includes(query) ? 'inline-flex' : 'none';
+            });
+        });
+
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Theme toggle
+        (function() {
+            const root = document.documentElement;
+            const saved = localStorage.getItem('theme');
+            if (saved) root.setAttribute('data-theme', saved);
+            document.getElementById('themeToggle')?.addEventListener('click', function() {
+                const current = root.getAttribute('data-theme');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                let next;
+                if (!current) next = systemDark ? 'light' : 'dark';
+                else if (current === 'dark') next = 'light';
+                else next = 'dark';
+                root.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            });
+        })();
+    </script>
+</body>
+</html>
