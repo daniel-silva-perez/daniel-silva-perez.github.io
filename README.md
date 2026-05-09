@@ -1,85 +1,71 @@
-# Minimal.
+# daniel-silva-perez.github.io
 
-A thoughtfully designed personal blog built with clean HTML, CSS, and JavaScript. Featuring an editorial aesthetic with generous whitespace, refined typography, and smooth micro-interactions.
+Personal blog and writing space. Built with vanilla HTML, CSS, and JavaScript — no frameworks, no build step.
+
+Live at [daniel-silva-perez.github.io](https://daniel-silva-perez.github.io)
+
+---
+
+## Overview
+
+A magazine-first personal site covering tech, life, theories, and whatever else crosses my mind. The design prioritizes reading: clean typography, generous whitespace, and a dual light/dark theme that respects your system preference.
 
 ## Pages
 
-- **blog.html** — Homepage with hero featured post and latest posts grid
-- **archive.html** — Complete archive of all posts with category filtering
-- **post.html** — Individual blog post template with optimized reading experience
-- **about.html** — About page with author bio and story
-- **index.html** — Existing portfolio/landing page
-
-## Design System
-
-Located in `.stitch/DESIGN.md`, the design system defines:
-
-- **Color Palette**: Blue primary (#2563EB), warm grays for secondary text
-- **Typography**: Plus Jakarta Sans for headlines, Inter for body text
-- **Components**: Hero cards, post grids, newsletter sections, sticky navigation
-- **Motion**: Smooth cubic-bezier transitions, scroll animations, hover states
-
-## Project Structure
-
-```
-.
-├── blog.html          # Main blog homepage
-├── archive.html        # Post archive with filtering
-├── post.html          # Single post template
-├── about.html         # About page
-├── index.html         # Portfolio landing page
-└── .stitch/
-    ├── DESIGN.md      # Design system documentation
-    └── designs/       # Generated design assets
-```
+| File | Purpose |
+|------|---------|
+| `index.html` | Landing page |
+| `blog.html` | Blog homepage with featured posts |
+| `post.html` | Individual post template |
+| `about.html` | About page |
+| `archive.html` | Full archive with category filtering |
+| `tags.html` | Tag index |
+| `404.html` | Custom error page |
 
 ## Features
 
-- **Responsive Design**: Mobile-first with breakpoints at 640px, 768px, and 1024px
-- **Performance**: Optimized images via Unsplash, lazy loading-ready
-- **Accessibility**: Semantic HTML, proper heading hierarchy, focus states
-- **Newsletter**: Built-in email subscription form with validation
-- **Category Tags**: Visual category chips on post cards
-- **Author Attribution**: Avatar initials, name, and date per post
+- **Dual theme** — Warm light mode and dark atmospheric mode. Switches automatically with your OS preference; manual toggle saves to `localStorage`
+- **Reading experience** — 680px content width, 18px body, 1.75 line-height, drop caps, styled blockquotes
+- **Scroll progress bar** — Reading progress indicator on post pages
+- **Responsive** — Mobile-first, tested across all screen sizes
+- **Accessible** — Keyboard navigation, focus-visible states, reduced-motion support, semantic HTML
+- **No dependencies** — Pure HTML/CSS/JS, opens in any browser
+
+## Theme System
+
+Colors are defined as CSS custom properties with three layers of specificity:
+
+```css
+:root { /* light mode defaults */ }
+[data-theme="dark"] { /* manual dark override */ }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { /* system dark */ } }
+```
+
+### Light mode — Warm Indie
+- Background: `#f7f3eb` · Text: `#1c1714` · Accent: `#c0603a`
+- Headings: Lora (serif)
+
+### Dark mode — Dark Atmospheric
+- Background: `#0c0c10` · Text: `#e9e4d9` · Accent: `#f5a623`
+- Headings: Inter 300
 
 ## Getting Started
 
-Simply open any HTML file in a browser. No build step required.
+No build step required. Open any file directly or serve locally:
 
 ```bash
-# Open directly
-open blog.html
-
-# Or serve locally
-python -m http.server 8000
+python3 -m http.server 8080
+# → http://localhost:8080
 ```
-
-Then visit `http://localhost:8000/blog.html`
 
 ## Customization
 
-### Colors
-Edit CSS variables in the `:root` selector:
-```css
---primary: #2563EB;
---secondary: #6B7280;
---accent: #1A1A1A;
---background: #FAFAFA;
-```
+Edit the CSS custom properties in each file's `:root` block to change colors, or swap the Google Fonts link in `<head>` to change typography.
 
-### Fonts
-Fonts are loaded via Google Fonts. Modify the `<link>` tag and font-family declarations to change typography.
+## Design System
 
-### Content
-Replace placeholder posts by updating the post cards in `blog.html` or the post list in `archive.html`.
-
-## Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
+Documented in [`.stitch/DESIGN.md`](.stitch/DESIGN.md).
 
 ## License
 
-MIT License — feel free to use this template for your own blog.
+MIT
