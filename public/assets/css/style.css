@@ -240,8 +240,16 @@ nav.scrolled{padding:.6rem 2rem}
 /* ── BLOG LAYOUT ── */
 .blog-hero {
     max-width: var(--max-width);
-    margin: 3rem auto 4rem;
-    padding: 6rem 2rem 0;
+    margin: 0 auto;
+    padding: 8rem 2rem 2rem;
+}
+
+.section-title {
+    max-width: var(--max-width);
+    margin: 4rem auto 2rem;
+    padding: 0 2rem;
+    font-size: 2.25rem;
+    letter-spacing: -0.02em;
 }
 .hero-card {
     display: block;
@@ -589,7 +597,8 @@ footer{ text-align:center;padding:4rem 2rem; border-top:1px solid var(--border);
     .hero { padding: 6rem 1.5rem 4rem; }
     .hero h1 { font-size: 2.5rem; }
 
-    .blog-hero { padding: 5rem 1rem 0; }
+    .blog-hero { padding: 6rem 1.5rem 1rem; }
+    .section-title { padding: 0 1.5rem; font-size: 1.75rem; margin: 3rem auto 1.5rem; }
     .hero-card { height: auto; min-height: 450px; }
     .hero-overlay { padding: 2rem; }
     .hero-title { font-size: 1.8rem; }
