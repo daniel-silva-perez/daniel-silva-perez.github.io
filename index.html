@@ -285,6 +285,15 @@
             .more-grid{grid-template-columns:1fr}
             section{padding:4rem 1.25rem}
         }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
     <link rel="stylesheet" href="magazine.css">
 </head>
