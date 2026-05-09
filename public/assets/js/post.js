@@ -57,6 +57,7 @@ function copyLink(event) {
         const btn = event.currentTarget;
         const original = btn.innerHTML;
         btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+        window.applyCaseMode?.(document.documentElement.getAttribute('data-case') === 'lowercase' ? 'lowercase' : 'regular');
         setTimeout(() => { btn.innerHTML = original; }, 2000);
     });
 }

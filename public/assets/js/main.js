@@ -41,3 +41,80 @@ if (backToTop) {
         localStorage.setItem('theme', next);
     });
 })();
+
+// ── Case toggle ──
+(function() {
+    const root = document.documentElement;
+    const caseToggle = document.getElementById('caseToggle');
+    const originalText = new Map();
+    const originalAttributes = new Map();
+    function rememberText() {
+        const textWalker = document.createTreeWalker(
+            document.body,
+            NodeFilter.SHOW_TEXT,
+            {
+                acceptNode(node) {
+                    if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                    const parent = node.parentElement;
+                    if (!parent || ['SCRIPT', 'STYLE', 'NOSCRIPT', 'SVG'].includes(parent.tagName)) {
+                        return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            }
+        );
+        const nodes = [];
+        let node;
+        while ((node = textWalker.nextNode())) nodes.push(node);
+        nodes.forEach(textNode => {
+            if (!originalText.has(textNode)) originalText.set(textNode, textNode.nodeValue);
+        });
+
+        document.querySelectorAll('input[placeholder], textarea[placeholder], input[value], button[aria-label], a[aria-label], [title]').forEach(el => {
+            if (!originalAttributes.has(el)) {
+                originalAttributes.set(el, {
+                    placeholder: el.getAttribute('placeholder'),
+                    value: el.getAttribute('value'),
+                    ariaLabel: el.getAttribute('aria-label'),
+                    title: el.getAttribute('title')
+                });
+            }
+        });
+    }
+
+    function transformAttributes(el, originals, lowercase) {
+        [
+            ['placeholder', originals.placeholder],
+            ['value', originals.value],
+            ['aria-label', originals.ariaLabel],
+            ['title', originals.title]
+        ].forEach(([name, value]) => {
+            if (value === null) return;
+            el.setAttribute(name, lowercase ? value.toLowerCase() : value);
+        });
+    }
+
+    window.applyCaseMode = function(mode) {
+        rememberText();
+        const lowercase = mode === 'lowercase';
+        originalText.forEach((value, node) => {
+            node.nodeValue = lowercase ? value.toLowerCase() : value;
+        });
+        originalAttributes.forEach((value, el) => transformAttributes(el, value, lowercase));
+        root.toggleAttribute('data-case', lowercase);
+        if (lowercase) root.setAttribute('data-case', 'lowercase');
+        if (caseToggle) {
+            caseToggle.setAttribute('aria-pressed', String(lowercase));
+            caseToggle.textContent = lowercase ? 'aa' : 'Aa';
+        }
+    };
+
+    const saved = localStorage.getItem('caseMode') === 'lowercase' ? 'lowercase' : 'regular';
+    window.applyCaseMode(saved);
+
+    caseToggle?.addEventListener('click', () => {
+        const next = root.getAttribute('data-case') === 'lowercase' ? 'regular' : 'lowercase';
+        localStorage.setItem('caseMode', next);
+        window.applyCaseMode(next);
+    });
+})();

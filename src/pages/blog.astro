@@ -10,7 +10,7 @@ const featuredPost = posts[0];
 const otherPosts = posts.slice(1);
 ---
 
-<Layout title="Danny Silva | Blog" activeNav="blog">
+<Layout title="Notebook — Danny Silva" activeNav="blog">
     <div class="scroll-progress" id="scrollProgress"></div>
 
     {featuredPost && (
@@ -35,7 +35,7 @@ const otherPosts = posts.slice(1);
 
     <section class="categories-section">
         <div class="categories-header">
-            <h2 class="categories-title">Notes, essays, travel, books, and the occasional tech thing</h2>
+            <h2 class="categories-title">Notes from philosophy, art, books, technology, and whatever is occupying my attention</h2>
         </div>
         <div class="categories-scroll">
             <a href="/tags" class="category-chip">
@@ -47,11 +47,11 @@ const otherPosts = posts.slice(1);
                 <span class="category-chip-count">11 posts</span>
             </a>
             <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Essays</span>
+                <span class="category-chip-name">Philosophy</span>
                 <span class="category-chip-count">10 posts</span>
             </a>
             <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Travel</span>
+                <span class="category-chip-name">Art</span>
                 <span class="category-chip-count">5 posts</span>
             </a>
             <a href="/tags" class="category-chip">
@@ -65,7 +65,7 @@ const otherPosts = posts.slice(1);
         </div>
     </section>
 
-    <h2 class="section-title">Latest Writing</h2>
+    <h2 class="section-title">Latest Notes</h2>
 
     <section class="posts-grid">
         {posts.map((post) => (

@@ -2,25 +2,25 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Danny Silva | Notes on living, building, and paying attention." activeNav="home">
+<Layout title="Danny Silva | Public Notebook" activeNav="home">
     <!-- ── HERO ── -->
     <section class="hero" id="top">
         <div class="hero-content">
-            <div class="hero-label fade-up">Personal notebook</div>
-            <h1 class="fade-up d1">Notes on living, building, and <em>paying attention.</em></h1>
+            <div class="hero-label fade-up">Public notebook</div>
+            <h1 class="fade-up d1">Fragments from a mind trying to <em>pay attention.</em></h1>
             <p class="hero-desc fade-up d2">
-                Life, essays, books, travel, and the occasional software note. I still build serious systems, but this site starts with the writing.
+                A quiet place for what I am thinking through: philosophy, art, technology, books, experiments, attention, and the work of becoming a little less distracted.
             </p>
             <div class="hero-buttons fade-up d3">
-                <a href="/blog" class="btn btn-primary">Read the Writing
+                <a href="/blog" class="btn btn-primary">Enter the Notebook
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
                 </a>
-                <a href="/about" class="btn btn-ghost">About Me</a>
+                <a href="/about" class="btn btn-ghost">Why This Exists</a>
             </div>
             <div class="stats fade-up d4">
-                <div class="stat"><div class="stat-num">Life</div><div class="stat-label">Notes</div></div>
-                <div class="stat"><div class="stat-num">Books</div><div class="stat-label">Essays</div></div>
-                <div class="stat"><div class="stat-num">Tech</div><div class="stat-label">Sometimes</div></div>
+                <div class="stat"><div class="stat-num">Mind</div><div class="stat-label">In Public</div></div>
+                <div class="stat"><div class="stat-num">Books</div><div class="stat-label">Marked Up</div></div>
+                <div class="stat"><div class="stat-num">Work</div><div class="stat-label">In Progress</div></div>
             </div>
         </div>
     </section>
@@ -29,19 +29,35 @@ import Layout from '../layouts/Layout.astro';
     <section id="about" class="about-section">
         <div class="section-header">
             <div class="section-label fade-up">About</div>
-            <h2 class="fade-up d1">The person behind the notes</h2>
+            <h2 class="fade-up d1">Not a portfolio, more like a field journal</h2>
         </div>
         <div class="about-content">
             <p class="fade-up d2">
-                I'm <strong>Danny</strong>. I write about the ordinary stuff that keeps becoming important: routines, books, travel, attention, ambition, and what it means to build a life while building software.
+                I'm <strong>Danny</strong>. This is where I leave traces of what I am noticing before it hardens into an opinion: ideas from books, small philosophical arguments with myself, art that lingers, tools I am building, and ordinary days that teach something.
             </p>
             <p class="fade-up d3">
-                The software work is still here, but it is no longer the whole front door. It lives beside the personal writing as one part of a wider notebook.
+                Technology is part of the notebook because it is part of my life, but it is not the whole point. The real subject is attention: where it goes, what it makes possible, and what it costs.
             </p>
             <p class="fade-up d4">
-                If you are here for the human side, start with the writing.
+                Read it as a conversation with myself that happens to be public.
             </p>
         </div>
     </section>
 
+    <!-- ── CONTACT ── -->
+    <section id="contact" class="cta">
+        <div class="section-label fade-up">Open thread</div>
+        <h2 class="fade-up d1">Read quietly, wander freely, send a note</h2>
+        <p class="fade-up d2">The notebook is the front door. Email is there if something resonates.</p>
+        <div class="cta-links fade-up d3">
+            <a href="https://github.com/danielsilvaperez" target="_blank" rel="noopener" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                GitHub
+            </a>
+            <a href="mailto:danielsp-recruiter-inquiries@outlook.com" class="btn btn-ghost">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
+                Send a Note
+            </a>
+        </div>
+    </section>
 </Layout>

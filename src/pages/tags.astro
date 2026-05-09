@@ -2,14 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Tags — Danny Silva | Blog" activeNav="tags">
+<Layout title="Tags — Danny Silva | Notebook" activeNav="tags">
     <main>
         <section class="tags-hero">
             <h1 class="tags-title">Tags</h1>
-            <p class="tags-subtitle">Life, notes, essays, travel, books, and the occasional tech thing.</p>
+            <p class="tags-subtitle">The recurring subjects in the notebook: life, philosophy, art, books, technology, health, and attention.</p>
             <div class="search-container">
                 <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" class="search-input" id="tagSearch" placeholder="Search tags...">
+                <input type="text" class="search-input" id="tagSearch" placeholder="Search the recurring subjects...">
             </div>
         </section>
 
@@ -22,20 +22,20 @@ import Layout from '../layouts/Layout.astro';
                 Notes
                 <span class="tag-count">11</span>
             </button>
-            <button class="tag tag-size-4" data-tag="Essays">
-                Essays
+            <button class="tag tag-size-4" data-tag="Philosophy">
+                Philosophy
                 <span class="tag-count">10</span>
             </button>
-            <button class="tag tag-size-3" data-tag="Travel">
-                Travel
+            <button class="tag tag-size-3" data-tag="Art">
+                Art
                 <span class="tag-count">5</span>
             </button>
             <button class="tag tag-size-3" data-tag="Books">
                 Books
                 <span class="tag-count">6</span>
             </button>
-            <button class="tag tag-size-2" data-tag="Writing">
-                Writing
+            <button class="tag tag-size-2" data-tag="Attention">
+                Attention
                 <span class="tag-count">9</span>
             </button>
             <button class="tag tag-size-1" data-tag="Health">
@@ -49,7 +49,7 @@ import Layout from '../layouts/Layout.astro';
         </section>
 
         <section class="tagged-posts" id="taggedPosts">
-            <h2 class="tagged-posts-title" id="taggedPostsTitle">Posts tagged with <span id="activeTagName"></span></h2>
+            <h2 class="tagged-posts-title" id="taggedPostsTitle">Notes tagged with <span id="activeTagName"></span></h2>
             <div class="tagged-posts-list" id="taggedPostsList"></div>
         </section>
     </main>
