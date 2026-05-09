@@ -266,6 +266,10 @@
             letter-spacing: 0.06em;
         }
 
+        .post-tag.tech-label {
+            color: var(--secondary);
+        }
+
         .post-date {
             font-size: 0.8rem;
             color: var(--secondary);
@@ -491,73 +495,74 @@
     <main>
         <section class="archive-hero">
             <h1 class="archive-title">Archive</h1>
-            <p class="archive-subtitle">Every story we've published, organized by topic and time.</p>
+            <p class="archive-subtitle">Life, notes, essays, travel, books, and a few tech things when they are worth writing down.</p>
 
             <div class="category-filter">
                 <button class="category-btn active" data-category="all">All Posts</button>
+                <button class="category-btn" data-category="life">Life</button>
+                <button class="category-btn" data-category="notes">Notes</button>
+                <button class="category-btn" data-category="essays">Essays</button>
                 <button class="category-btn" data-category="travel">Travel</button>
-                <button class="category-btn" data-category="lifestyle">Lifestyle</button>
-                <button class="category-btn" data-category="technology">Technology</button>
                 <button class="category-btn" data-category="books">Books</button>
-                <button class="category-btn" data-category="design">Design</button>
+                <button class="category-btn" data-category="tech">Tech</button>
             </div>
         </section>
 
         <section class="archive-content">
             <div class="posts-list">
-                <article class="post-row" data-category="travel">
-                    <div class="post-row-image">
-                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&h=400&fit=crop" alt="Swiss Alps">
-                    </div>
-                    <div class="post-row-content">
-                        <div class="post-row-meta">
-                            <span class="post-tag">Travel</span>
-                            <span class="post-date">May 5, 2026</span>
-                        </div>
-                        <h3 class="post-row-title">Finding Solitude in the Swiss Alps</h3>
-                        <p class="post-row-excerpt">Three weeks of hiking through pristine wilderness taught me more about silence than a decade of meditation.</p>
-                        <div class="post-row-author">
-                            <div class="author-avatar">EF</div>
-                            <span class="author-name">Elena Fischer</span>
-                            <span class="read-time">6 min read</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post-row" data-category="lifestyle">
+                <article class="post-row" data-category="life">
                     <div class="post-row-image">
                         <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=400&fit=crop" alt="Coffee">
                     </div>
                     <div class="post-row-content">
                         <div class="post-row-meta">
-                            <span class="post-tag">Lifestyle</span>
-                            <span class="post-date">May 2, 2026</span>
+                            <span class="post-tag">Life</span>
+                            <span class="post-date">May 5, 2026</span>
                         </div>
                         <h3 class="post-row-title">The Ritual of Morning Coffee</h3>
                         <p class="post-row-excerpt">Why the simplest routines often hold the deepest meaning, and how to make every cup count.</p>
                         <div class="post-row-author">
-                            <div class="author-avatar">MC</div>
-                            <span class="author-name">Marcus Chen</span>
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
                             <span class="read-time">5 min read</span>
                         </div>
                     </div>
                 </article>
 
-                <article class="post-row" data-category="technology">
+                <article class="post-row" data-category="notes">
                     <div class="post-row-image">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop" alt="Digital">
+                        <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=400&fit=crop" alt="Notebook">
                     </div>
                     <div class="post-row-content">
                         <div class="post-row-meta">
-                            <span class="post-tag">Technology</span>
+                            <span class="post-tag">Notes</span>
+                            <span class="post-date">May 2, 2026</span>
+                        </div>
+                        <h3 class="post-row-title">Small Things I Keep Coming Back To</h3>
+                        <p class="post-row-excerpt">A running list of habits, objects, places, and ideas that keep making ordinary days better.</p>
+                        <div class="post-row-author">
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-row" data-category="essays">
+                    <div class="post-row-image">
+                        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop" alt="Notebook">
+                    </div>
+                    <div class="post-row-content">
+                        <div class="post-row-meta">
+                            <span class="post-tag">Essays</span>
                             <span class="post-date">April 28, 2026</span>
                         </div>
-                        <h3 class="post-row-title">Reclaiming Focus in the Digital Age</h3>
-                        <p class="post-row-excerpt">A practical guide to building a more intentional relationship with our devices.</p>
+                        <h3 class="post-row-title">On Letting a Year Be Uneven</h3>
+                        <p class="post-row-excerpt">Some seasons are for output, some are for repair, and some only make sense in hindsight.</p>
                         <div class="post-row-author">
-                            <div class="author-avatar">SO</div>
-                            <span class="author-name">Sarah Okonkwo</span>
-                            <span class="read-time">8 min read</span>
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
+                            <span class="read-time">7 min read</span>
                         </div>
                     </div>
                 </article>
@@ -571,11 +576,11 @@
                             <span class="post-tag">Books</span>
                             <span class="post-date">April 22, 2026</span>
                         </div>
-                        <h3 class="post-row-title">Why I Stopped Chasing Productivity</h3>
-                        <p class="post-row-excerpt">The life-changing book that shifted my entire worldview and what it taught me about rest.</p>
+                        <h3 class="post-row-title">Books That Made Me Less Restless</h3>
+                        <p class="post-row-excerpt">A few reads that changed how I think about ambition, patience, and attention.</p>
                         <div class="post-row-author">
-                            <div class="author-avatar">JM</div>
-                            <span class="author-name">James Mitchell</span>
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
                             <span class="read-time">7 min read</span>
                         </div>
                     </div>
@@ -593,27 +598,27 @@
                         <h3 class="post-row-title">Lessons from the Portuguese Coast</h3>
                         <p class="post-row-excerpt">Wandering through Lisbon and Porto, discovering the beauty of impermanence.</p>
                         <div class="post-row-author">
-                            <div class="author-avatar">AR</div>
-                            <span class="author-name">Ana Rodriguez</span>
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
                             <span class="read-time">6 min read</span>
                         </div>
                     </div>
                 </article>
 
-                <article class="post-row" data-category="design">
+                <article class="post-row" data-category="tech">
                     <div class="post-row-image">
-                        <img src="https://images.unsplash.com/photo-1516245834210-c4c1427878cc?w=600&h=400&fit=crop" alt="Workspace">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="Code editor">
                     </div>
                     <div class="post-row-content">
                         <div class="post-row-meta">
-                            <span class="post-tag">Design</span>
+                            <span class="post-tag tech-label">Tech</span>
                             <span class="post-date">April 14, 2026</span>
                         </div>
-                        <h3 class="post-row-title">Designing Spaces for Mental Clarity</h3>
-                        <p class="post-row-excerpt">How the objects we surround ourselves with shape our inner state and creative output.</p>
+                        <h3 class="post-row-title">The Future of AI-Assisted Development</h3>
+                        <p class="post-row-excerpt">A quieter technical note on how language models are changing the way software gets made.</p>
                         <div class="post-row-author">
-                            <div class="author-avatar">LH</div>
-                            <span class="author-name">Lena Hoffmann</span>
+                            <div class="author-avatar">DS</div>
+                            <span class="author-name">Danny Silva</span>
                             <span class="read-time">5 min read</span>
                         </div>
                     </div>
