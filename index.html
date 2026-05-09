@@ -286,39 +286,10 @@
             section{padding:4rem 1.25rem}
         }
 
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--card);
+        /* Selection Color */
+        ::selection {
+            background: rgba(108, 99, 255, 0.3);
             color: var(--text);
-            border: 1px solid var(--border);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(20px) scale(0.9);
-            transition: all 0.3s ease;
-            z-index: 99;
-            pointer-events: none;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-        }
-        .back-to-top svg {
-            width: 20px;
-            height: 20px;
-        }
-        .back-to-top:hover {
-            background: var(--bg2);
-            transform: translateY(-2px);
         }
     </style>
     <link rel="stylesheet" href="magazine.css">
