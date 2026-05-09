@@ -3,55 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danny Silva | Notes, Essays, and Work</title>
+    <title>Danny Silva | Notes on living, building, and paying attention.</title>
     <meta name="description" content="Personal writing, notes, essays, travel, books, and selected software work by Danny Silva.">
+    <script>
+      (function() {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        :root{
-            --bg:#0a0a0f;
-            --bg2:#12121a;
-            --bg3:#1a1a28;
-            --text:#e4e4ef;
-            --text2:#8888a0;
-            --accent:#6c63ff;
-            --accent2:#a78bfa;
-            --accent3:#818cf8;
-            --green:#34d399;
-            --orange:#fb923c;
-            --cyan:#22d3ee;
-            --rose:#fb7185;
-            --card:#14141f;
-            --border:#1e1e30;
-            --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-            --mono:'SF Mono','Fira Code','Fira Mono',Menlo,Consolas,monospace;
+
+        :root {
+            --bg: #f7f3eb;
+            --surface: #f0ead9;
+            --text: #1c1714;
+            --text-muted: #6b5e54;
+            --accent: #c0603a;
+            --border: #ddd5c4;
+            --card-shadow: 0 2px 8px rgba(28,23,20,0.08);
+            --heading-font: 'Lora', Georgia, serif;
+            --heading-weight: 700;
+            --heading-tracking: 0;
+            --image-filter: none;
+            --selection-bg: rgba(192,96,58,0.2);
+            --nav-bg: rgba(247,243,235,0.92);
+            --code-bg: #ede8df;
+            --code-text: #1c1714;
+            --scrollbar-thumb: #ddd5c4;
+            --blockquote-border: #c0603a;
         }
-        html{scroll-behavior:smooth;font-size:16px}
+
+        [data-theme="dark"] {
+            --bg: #0c0c10;
+            --surface: #14141a;
+            --text: #e9e4d9;
+            --text-muted: #8a8478;
+            --accent: #f5a623;
+            --border: rgba(255,255,255,0.08);
+            --card-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+            --heading-font: 'Inter', sans-serif;
+            --heading-weight: 300;
+            --heading-tracking: -0.02em;
+            --image-filter: saturate(0.85);
+            --selection-bg: rgba(245,166,35,0.25);
+            --nav-bg: rgba(12,12,16,0.92);
+            --code-bg: #1a1a22;
+            --code-text: #f5a623;
+            --scrollbar-thumb: rgba(255,255,255,0.12);
+            --blockquote-border: #f5a623;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0c0c10;
+                --surface: #14141a;
+                --text: #e9e4d9;
+                --text-muted: #8a8478;
+                --accent: #f5a623;
+                --border: rgba(255,255,255,0.08);
+                --card-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+                --heading-font: 'Inter', sans-serif;
+                --heading-weight: 300;
+                --heading-tracking: -0.02em;
+                --image-filter: saturate(0.85);
+                --selection-bg: rgba(245,166,35,0.25);
+                --nav-bg: rgba(12,12,16,0.92);
+                --code-bg: #1a1a22;
+                --code-text: #f5a623;
+                --scrollbar-thumb: rgba(255,255,255,0.12);
+                --blockquote-border: #f5a623;
+            }
+        }
+
+        html{scroll-behavior:smooth;font-size:18px}
         body{
-            font-family:var(--font);
+            font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
             background:var(--bg);
             color:var(--text);
-            line-height:1.6;
+            line-height:1.75;
             overflow-x:hidden;
         }
-        a{color:var(--accent2);text-decoration:none;transition:color .2s}
-        a:hover{color:var(--accent3)}
+        ::selection{background:var(--selection-bg);color:var(--text)}
+        a{color:var(--accent);text-decoration:none;transition:color .2s}
+        a:hover{text-decoration:underline}
+        img{filter:var(--image-filter)}
 
         /* ── NAV ── */
         nav{
             position:fixed;top:0;left:0;right:0;z-index:100;
             padding:1rem 2rem;
             display:flex;justify-content:space-between;align-items:center;
-            background:rgba(10,10,15,.8);
-            backdrop-filter:blur(20px);
+            background:var(--nav-bg);
+            backdrop-filter:blur(12px);
             border-bottom:1px solid var(--border);
             transition:all .3s;
         }
-        nav.scrolled{padding:.6rem 2rem;background:rgba(10,10,15,.95)}
-        .nav-logo{font-weight:700;font-size:1.1rem;letter-spacing:-.02em;color:var(--text)}
+        nav.scrolled{padding:.6rem 2rem}
+        .nav-logo{font-family:var(--heading-font);font-weight:700;font-size:1.1rem;letter-spacing:-.02em;color:var(--text);text-decoration:none}
         .nav-logo span{color:var(--accent)}
-        .nav-links{display:flex;gap:2rem;list-style:none}
-        .nav-links a{color:var(--text2);font-size:.875rem;font-weight:500;letter-spacing:.02em;text-transform:uppercase;transition:color .2s}
+        .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+        .nav-links a{color:var(--text-muted);font-size:.875rem;font-weight:500;letter-spacing:.02em;text-transform:uppercase;transition:color .2s;text-decoration:none}
         .nav-links a:hover,.nav-links a.active{color:var(--text)}
+
+        /* ── THEME TOGGLE ── */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 8px;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .theme-toggle .icon-moon { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: none; }
+            :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: block; }
+        }
 
         /* ── HERO ── */
         .hero{
@@ -59,60 +136,55 @@
             position:relative;overflow:hidden;
             padding:6rem 2rem 4rem;
         }
-        .hero-bg{
-            position:absolute;inset:0;
-            background:
-                radial-gradient(ellipse 80% 60% at 50% 0%,rgba(108,99,255,.12),transparent),
-                radial-gradient(ellipse 60% 40% at 80% 80%,rgba(167,139,250,.08),transparent),
-                radial-gradient(ellipse 50% 50% at 20% 60%,rgba(34,211,238,.05),transparent);
-        }
-        .grid-overlay{
-            position:absolute;inset:0;
-            background-image:
-                linear-gradient(rgba(108,99,255,.04) 1px,transparent 1px),
-                linear-gradient(90deg,rgba(108,99,255,.04) 1px,transparent 1px);
-            background-size:60px 60px;
-            mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black,transparent);
-        }
         .hero-content{position:relative;max-width:800px;text-align:center}
         .hero-label{
             display:inline-block;
             padding:.35rem .9rem;border-radius:100px;
-            background:rgba(108,99,255,.1);border:1px solid rgba(108,99,255,.2);
+            background:rgba(192,96,58,0.1);border:1px solid rgba(192,96,58,0.2);
             font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-            color:var(--accent2);margin-bottom:1.5rem;
+            color:var(--accent);margin-bottom:1.5rem;
+        }
+        [data-theme="dark"] .hero-label {
+            background:rgba(245,166,35,0.1);border-color:rgba(245,166,35,0.2);
+        }
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .hero-label {
+                background:rgba(245,166,35,0.1);border-color:rgba(245,166,35,0.2);
+            }
         }
         .hero h1{
+            font-family:var(--heading-font);
             font-size:clamp(2.5rem,6vw,4.5rem);
-            font-weight:800;letter-spacing:-.04em;
-            line-height:1.1;margin-bottom:1.5rem;
+            font-weight:var(--heading-weight);
+            letter-spacing:var(--heading-tracking);
+            line-height:1.15;margin-bottom:1.5rem;
+            color:var(--text);
         }
-        .hero h1 .gradient{
-            background:linear-gradient(135deg,var(--accent),var(--accent2),var(--cyan));
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-            background-clip:text;
+        .hero h1 em{
+            color:var(--accent);
+            font-style:italic;
         }
         .hero-desc{
-            font-size:1.15rem;color:var(--text2);max-width:600px;margin:0 auto 2.5rem;
-            line-height:1.7;
+            font-size:1rem;color:var(--text-muted);max-width:600px;margin:0 auto 2.5rem;
+            line-height:1.75;
         }
         .hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
         .btn{
             display:inline-flex;align-items:center;gap:.5rem;
             padding:.75rem 1.75rem;border-radius:8px;
             font-weight:600;font-size:.9rem;
-            transition:all .25s;cursor:pointer;border:none;
+            transition:all .25s;cursor:pointer;border:none;text-decoration:none;
         }
         .btn-primary{
             background:var(--accent);color:#fff;
-            box-shadow:0 4px 20px rgba(108,99,255,.3);
+            box-shadow:0 4px 16px rgba(192,96,58,0.25);
         }
-        .btn-primary:hover{background:var(--accent3);transform:translateY(-2px);box-shadow:0 6px 30px rgba(108,99,255,.4);color:#fff}
+        .btn-primary:hover{opacity:.9;transform:translateY(-2px);color:#fff;text-decoration:none}
         .btn-ghost{
             background:transparent;color:var(--text);
             border:1px solid var(--border);
         }
-        .btn-ghost:hover{border-color:var(--accent);color:var(--accent2);transform:translateY(-2px)}
+        .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);text-decoration:none}
 
         /* ── STATS ── */
         .stats{
@@ -121,138 +193,54 @@
         }
         .stat{text-align:center}
         .stat-num{font-size:2rem;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
-        .stat-label{font-size:.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem}
+        .stat-label{font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem}
 
         /* ── SECTIONS ── */
         section{padding:6rem 2rem}
         .section-header{text-align:center;margin-bottom:4rem}
-        .section-header h2{font-size:2.2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem}
-        .section-header p{color:var(--text2);max-width:500px;margin:0 auto;font-size:1rem}
+        .section-header h2{
+            font-family:var(--heading-font);
+            font-size:2.2rem;
+            font-weight:var(--heading-weight);
+            letter-spacing:var(--heading-tracking);
+            margin-bottom:.75rem;color:var(--text);
+        }
+        .section-header p{color:var(--text-muted);max-width:500px;margin:0 auto;font-size:1rem}
         .section-label{
             display:inline-block;
             font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
             color:var(--accent);margin-bottom:.75rem;
         }
 
-        /* ── FEATURED PROJECTS ── */
-        .featured-grid{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
-            gap:1.5rem;max-width:1200px;margin:0 auto;
-        }
-        .project-card{
-            background:var(--card);border:1px solid var(--border);
-            border-radius:16px;padding:2rem;
-            transition:all .3s;position:relative;overflow:hidden;
-        }
-        .project-card::before{
-            content:'';position:absolute;top:0;left:0;right:0;height:2px;
-            background:linear-gradient(90deg,var(--accent),var(--accent2));
-            opacity:0;transition:opacity .3s;
-        }
-        .project-card:hover{
-            border-color:rgba(108,99,255,.3);
-            transform:translateY(-4px);
-            box-shadow:0 20px 60px rgba(0,0,0,.3);
-        }
-        .project-card:hover::before{opacity:1}
-        .project-icon{
-            width:48px;height:48px;border-radius:12px;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.3rem;margin-bottom:1.25rem;
-        }
-        .project-card h3{font-size:1.2rem;font-weight:700;margin-bottom:.5rem;letter-spacing:-.02em}
-        .project-card p{color:var(--text2);font-size:.9rem;line-height:1.6;margin-bottom:1.25rem}
-        .project-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
-        .tag{
-            padding:.2rem .6rem;border-radius:6px;
-            font-size:.7rem;font-weight:600;letter-spacing:.02em;
-            background:rgba(108,99,255,.1);color:var(--accent2);
-        }
-        .tag.rust{background:rgba(251,113,133,.1);color:var(--rose)}
-        .tag.python{background:rgba(52,211,153,.1);color:var(--green)}
-        .tag.ocaml{background:rgba(251,146,60,.1);color:var(--orange)}
-        .tag.swift{background:rgba(34,211,238,.1);color:var(--cyan)}
-        .project-link{
-            display:inline-flex;align-items:center;gap:.4rem;
-            font-size:.85rem;font-weight:600;color:var(--text2);
-            transition:color .2s;
-        }
-        .project-link:hover{color:var(--accent2)}
-        .project-link svg{width:16px;height:16px;transition:transform .2s}
-        .project-link:hover svg{transform:translateX(3px)}
-
-        /* ── SKILLS ── */
-        .skills-section{background:var(--bg2)}
-        .skills-grid{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-            gap:1.5rem;max-width:1000px;margin:0 auto;
-        }
-        .skill-group{
-            background:var(--card);border:1px solid var(--border);
-            border-radius:16px;padding:1.75rem;
-        }
-        .skill-group h3{
-            font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
-            color:var(--text2);margin-bottom:1rem;
-        }
-        .skill-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-        .skill-tag{
-            padding:.4rem .8rem;border-radius:8px;
-            font-size:.8rem;font-weight:500;
-            background:rgba(108,99,255,.06);color:var(--text);
-            border:1px solid var(--border);
-            transition:all .2s;
-        }
-        .skill-tag:hover{border-color:var(--accent);background:rgba(108,99,255,.1)}
-
-        /* ── MORE PROJECTS ── */
-        .more-projects{max-width:1200px;margin:0 auto}
-        .more-grid{
-            display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-            gap:1rem;
-        }
-        .mini-card{
-            display:flex;align-items:center;gap:1rem;
-            background:var(--card);border:1px solid var(--border);
-            border-radius:12px;padding:1.25rem;
-            transition:all .25s;
-        }
-        .mini-card:hover{border-color:rgba(108,99,255,.3);transform:translateY(-2px)}
-        .mini-icon{
-            width:40px;height:40px;border-radius:10px;flex-shrink:0;
-            display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-        }
-        .mini-card h4{font-size:.95rem;font-weight:600;margin-bottom:.2rem}
-        .mini-card p{font-size:.78rem;color:var(--text2);line-height:1.4}
-        .mini-lang{
-            font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
-            color:var(--accent2);margin-top:.3rem;display:inline-block;
-        }
-
         /* ── ABOUT ── */
-        .about-section{background:var(--bg2)}
+        .about-section{background:var(--surface)}
         .about-content{
             max-width:700px;margin:0 auto;text-align:center;
         }
         .about-content p{
-            color:var(--text2);font-size:1.05rem;line-height:1.8;margin-bottom:1.5rem;
+            color:var(--text-muted);font-size:1.05rem;line-height:1.8;margin-bottom:1.5rem;
         }
         .about-content strong{color:var(--text)}
 
         /* ── CONTACT / CTA ── */
         .cta{
             text-align:center;
-            background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
         }
-        .cta h2{font-size:2.2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:1rem}
-        .cta p{color:var(--text2);margin-bottom:2rem;font-size:1.05rem}
+        .cta h2{
+            font-family:var(--heading-font);
+            font-size:2.2rem;
+            font-weight:var(--heading-weight);
+            letter-spacing:var(--heading-tracking);
+            margin-bottom:1rem;color:var(--text);
+        }
+        .cta p{color:var(--text-muted);margin-bottom:2rem;font-size:1.05rem}
         .cta-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
 
         /* ── FOOTER ── */
         footer{
             text-align:center;padding:2rem;
             border-top:1px solid var(--border);
-            font-size:.8rem;color:var(--text2);
+            font-size:.8rem;color:var(--text-muted);
         }
 
         /* ── ANIMATIONS ── */
@@ -272,7 +260,7 @@
             .nav-links{
                 display:none;position:absolute;top:100%;left:0;right:0;
                 flex-direction:column;gap:0;
-                background:rgba(10,10,15,.98);
+                background:var(--nav-bg);
                 border-bottom:1px solid var(--border);
                 padding:1rem;
             }
@@ -281,10 +269,33 @@
             .mobile-toggle{display:block}
             .hero h1{font-size:2.2rem}
             .stats{gap:1.5rem}
-            .featured-grid{grid-template-columns:1fr}
-            .more-grid{grid-template-columns:1fr}
             section{padding:4rem 1.25rem}
         }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 99;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .back-to-top svg { width: 18px; height: 18px; stroke: currentColor; }
 
         /* Respect reduced motion preference */
         @media (prefers-reduced-motion: reduce) {
@@ -301,284 +312,39 @@
 
 <!-- ── NAV ── -->
 <nav>
-    <div class="nav-logo">Danny<span>.</span></div>
+    <a class="nav-logo" href="index.html">Danny<span>.</span></a>
     <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Toggle menu">&#9776;</button>
     <ul class="nav-links">
         <li><a href="blog.html">Writing</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#about">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="archive.html">Archive</a></li>
+        <li>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+                <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </li>
     </ul>
 </nav>
 
 <!-- ── HERO ── -->
 <section class="hero" id="top">
-    <div class="hero-bg"></div>
-    <div class="grid-overlay"></div>
     <div class="hero-content">
         <div class="hero-label fade-up">Personal magazine</div>
-        <h1 class="fade-up d1">Notes on living, building, and <span class="gradient">paying attention.</span></h1>
+        <h1 class="fade-up d1">Notes on living, building, and <em>paying attention.</em></h1>
         <p class="hero-desc fade-up d2">
             Life, essays, books, travel, and the occasional software note. I still build serious systems, but this site starts with the writing.
         </p>
         <div class="hero-buttons fade-up d3">
-            <a href="blog.html" class="btn btn-primary">Read the Magazine
+            <a href="blog.html" class="btn btn-primary">Read the Writing
                 <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
             </a>
-            <a href="#projects" class="btn btn-ghost">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
-                Projects
-            </a>
+            <a href="about.html" class="btn btn-ghost">About Me</a>
         </div>
         <div class="stats fade-up d4">
             <div class="stat"><div class="stat-num">Life</div><div class="stat-label">Notes</div></div>
             <div class="stat"><div class="stat-num">Books</div><div class="stat-label">Essays</div></div>
             <div class="stat"><div class="stat-num">Tech</div><div class="stat-label">Sometimes</div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ── FEATURED PROJECTS ── -->
-<section id="projects">
-    <div class="section-header">
-        <div class="section-label fade-up">Selected Work</div>
-        <h2 class="fade-up d1">Builder notes, in public</h2>
-        <p class="fade-up d2">A compact shelf of software projects for the people here for the technical side.</p>
-    </div>
-
-    <div class="featured-grid">
-
-        <!-- 1. Trading OCaml -->
-        <div class="project-card fade-up">
-            <div class="project-icon" style="background:rgba(251,146,60,.1)">&#9881;</div>
-            <h3>trading-ocaml</h3>
-            <p>Institutional-style multi-asset trading engine with modular venue adapters, concurrent strategy orchestration, risk controls, backtesting, and Monte Carlo simulation.</p>
-            <div class="project-tags">
-                <span class="tag ocaml">OCaml</span>
-                <span class="tag">Quantitative Finance</span>
-                <span class="tag">System Design</span>
-            </div>
-            <a href="https://github.com/danielsilvaperez/trading-ocaml" target="_blank" rel="noopener" class="project-link">
-                View on GitHub <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l5 5-5 5"/></svg>
-            </a>
-        </div>
-
-        <!-- 2. Adaptive Inference Runtime -->
-        <div class="project-card fade-up d1">
-            <div class="project-icon" style="background:rgba(52,211,153,.1)">&#9889;</div>
-            <h3>adaptive-inference-runtime</h3>
-            <p>Drop-in inference runtime with smart routing, speculative decoding, and KV-cache compression for deploying LLMs on constrained hardware.</p>
-            <div class="project-tags">
-                <span class="tag python">Python</span>
-                <span class="tag">Edge AI</span>
-                <span class="tag">Speculative Decoding</span>
-            </div>
-            <a href="https://github.com/danielsilvaperez/adaptive-inference-runtime" target="_blank" rel="noopener" class="project-link">
-                View on GitHub <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l5 5-5 5"/></svg>
-            </a>
-        </div>
-
-        <!-- 3. Sherlock -->
-        <div class="project-card fade-up d2">
-            <div class="project-icon" style="background:rgba(108,99,255,.1)">&#128270;</div>
-            <h3>sherlock</h3>
-            <p>Tauri desktop app for investigative case mapping &mdash; entity graphs, evidence tracking, timeline analysis, and AI-powered synthesis.</p>
-            <div class="project-tags">
-                <span class="tag rust">Rust</span>
-                <span class="tag">TypeScript</span>
-                <span class="tag">React</span>
-                <span class="tag">Tauri</span>
-            </div>
-            <a href="https://github.com/danielsilvaperez/sherlock" target="_blank" rel="noopener" class="project-link">
-                View on GitHub <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l5 5-5 5"/></svg>
-            </a>
-        </div>
-
-        <!-- 4. Trading Core -->
-        <div class="project-card fade-up d3">
-            <div class="project-icon" style="background:rgba(34,211,238,.1)">&#128200;</div>
-            <h3>trading-core</h3>
-            <p>Production Kalshi BTC volatility trading bot powered by a LightGBM + PatchTST Transformer ML pipeline with real-time inference.</p>
-            <div class="project-tags">
-                <span class="tag">TypeScript</span>
-                <span class="tag">Machine Learning</span>
-                <span class="tag">Kalshi</span>
-            </div>
-            <a href="https://github.com/danielsilvaperez/trading-core" target="_blank" rel="noopener" class="project-link">
-                View on GitHub <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l5 5-5 5"/></svg>
-            </a>
-        </div>
-
-        <!-- 5. Agent Orcha -->
-        <div class="project-card fade-up d4">
-            <div class="project-icon" style="background:rgba(167,139,250,.1)">&#129302;</div>
-            <h3>agent-orcha</h3>
-            <p>Parallel multi-agent CLI orchestrating Codex, Claude, Gemini, and Kimi across dependency-graph-aware scaffolds for automated software projects.</p>
-            <div class="project-tags">
-                <span class="tag">TypeScript</span>
-                <span class="tag">AI Agents</span>
-                <span class="tag">Orchestration</span>
-            </div>
-            <a href="https://github.com/danielsilvaperez/agent-orcha" target="_blank" rel="noopener" class="project-link">
-                View on GitHub <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l5 5-5 5"/></svg>
-            </a>
-        </div>
-
-        <!-- 6. Whale Copy RS -->
-        <div class="project-card fade-up">
-            <div class="project-icon" style="background:rgba(251,113,133,.1)">&#127760;</div>
-            <h3>whale-copy-rs</h3>
-            <p>On-chain whale position follower that tracks large wallets and automatically mirrors trades with configurable risk parameters.</p>
-            <div class="project-tags">
-                <span class="tag rust">Rust</span>
-                <span class="tag">Blockchain</span>
-                <span class="tag">Crypto</span>
-            </div>
-            <a href="https://github.com/danielsilvaperez/whale-copy-rs" target="_blank" rel="noopener" class="project-link">
-                View on GitHub <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l5 5-5 5"/></svg>
-            </a>
-        </div>
-
-    </div>
-</section>
-
-<!-- ── MORE PROJECTS ── -->
-<section style="background:var(--bg2)">
-    <div class="section-header">
-        <div class="section-label fade-up">More Work</div>
-        <h2 class="fade-up d1">And there's more</h2>
-    </div>
-    <div class="more-projects">
-        <div class="more-grid">
-
-            <a href="https://github.com/danielsilvaperez/the-council" target="_blank" rel="noopener" class="mini-card fade-up">
-                <div class="mini-icon" style="background:rgba(108,99,255,.1)">&#128483;</div>
-                <div>
-                    <h4>the-council</h4>
-                    <p>Multi-agent coding roundtable &mdash; orchestrates Codex, Claude, Gemini, and Kimi for collaborative software projects.</p>
-                    <span class="mini-lang">TypeScript</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/danielsilvaperez/kalshi-trading-bot" target="_blank" rel="noopener" class="mini-card fade-up d1">
-                <div class="mini-icon" style="background:rgba(34,211,238,.1)">&#128176;</div>
-                <div>
-                    <h4>kalshi-trading-bot</h4>
-                    <p>BTC 15min volatility scalper with logistic regression and real-time Kraken WebSocket feed.</p>
-                    <span class="mini-lang">TypeScript</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/danielsilvaperez/crypto-trading" target="_blank" rel="noopener" class="mini-card fade-up d2">
-                <div class="mini-icon" style="background:rgba(251,113,133,.1)">&#9878;</div>
-                <div>
-                    <h4>crypto-trading</h4>
-                    <p>Polymarket whale-copy trading system with multi-chain Telegram bot, P&L charts, alerts, and Kelly sizing.</p>
-                    <span class="mini-lang">Rust &middot; Python</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/danielsilvaperez/kqmlp" target="_blank" rel="noopener" class="mini-card fade-up d3">
-                <div class="mini-icon" style="background:rgba(52,211,153,.1)">&#128202;</div>
-                <div>
-                    <h4>kqmlp</h4>
-                    <p>Real-time control plane for BTC ML pipeline &mdash; Transformer inference, Kalshi orderbook, agent health monitoring.</p>
-                    <span class="mini-lang">TypeScript</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/danielsilvaperez/quitlab" target="_blank" rel="noopener" class="mini-card fade-up">
-                <div class="mini-icon" style="background:rgba(167,139,250,.1)">&#128154;</div>
-                <div>
-                    <h4>quitlab</h4>
-                    <p>Addiction recovery app with CBT, motivational interviewing, and urge surfing techniques.</p>
-                    <span class="mini-lang">TypeScript &middot; React</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/danielsilvaperez/btc-tickstream" target="_blank" rel="noopener" class="mini-card fade-up d1">
-                <div class="mini-icon" style="background:rgba(251,146,60,.1)">&#128640;</div>
-                <div>
-                    <h4>btc-tickstream</h4>
-                    <p>Real-time BTC tick data streaming and processing pipeline.</p>
-                    <span class="mini-lang">Rust</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/danielsilvaperez/neon-runner-game" target="_blank" rel="noopener" class="mini-card fade-up d2">
-                <div class="mini-icon" style="background:rgba(34,211,238,.1)">&#127918;</div>
-                <div>
-                    <h4>neon-runner-game</h4>
-                    <p>Browser-based neon cyberpunk endless runner with touchscreen support and canvas rendering.</p>
-                    <span class="mini-lang">JavaScript &middot; Canvas</span>
-                </div>
-            </a>
-
-            <a href="https://github.com/danielsilvaperez/apex" target="_blank" rel="noopener" class="mini-card fade-up d3">
-                <div class="mini-icon" style="background:rgba(108,99,255,.1)">&#9889;</div>
-                <div>
-                    <h4>apex</h4>
-                    <p>Websites & AI tools for local businesses. Helping small businesses leverage technology.</p>
-                    <span class="mini-lang">HTML &middot; JavaScript</span>
-                </div>
-            </a>
-
-        </div>
-    </div>
-</section>
-
-<!-- ── SKILLS ── -->
-<section id="skills" class="skills-section">
-    <div class="section-header">
-        <div class="section-label fade-up">Toolbox</div>
-        <h2 class="fade-up d1">The technical shelf</h2>
-    </div>
-    <div class="skills-grid">
-        <div class="skill-group fade-up">
-            <h3>Languages</h3>
-            <div class="skill-tags">
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">Rust</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">OCaml</span>
-                <span class="skill-tag">Swift</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">C++</span>
-            </div>
-        </div>
-        <div class="skill-group fade-up d1">
-            <h3>Domains</h3>
-            <div class="skill-tags">
-                <span class="skill-tag">Quantitative Trading</span>
-                <span class="skill-tag">AI/ML Infrastructure</span>
-                <span class="skill-tag">Multi-Agent Systems</span>
-                <span class="skill-tag">Blockchain / DeFi</span>
-                <span class="skill-tag">Full-Stack Web</span>
-                <span class="skill-tag">Desktop Apps</span>
-            </div>
-        </div>
-        <div class="skill-group fade-up d2">
-            <h3>Technologies</h3>
-            <div class="skill-tags">
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">Tauri</span>
-                <span class="skill-tag">WebSockets</span>
-                <span class="skill-tag">LightGBM</span>
-                <span class="skill-tag">Transformers</span>
-                <span class="skill-tag">Git</span>
-            </div>
-        </div>
-        <div class="skill-group fade-up d3">
-            <h3>Concepts</h3>
-            <div class="skill-tags">
-                <span class="skill-tag">System Design</span>
-                <span class="skill-tag">Monte Carlo Simulation</span>
-                <span class="skill-tag">Speculative Decoding</span>
-                <span class="skill-tag">Risk Management</span>
-                <span class="skill-tag">Real-Time Pipelines</span>
-                <span class="skill-tag">Functional Programming</span>
-            </div>
         </div>
     </div>
 </section>
@@ -597,7 +363,7 @@
             The software work is still here, but it is no longer the whole front door. It lives beside the personal writing as one part of a wider notebook.
         </p>
         <p class="fade-up d4">
-            If you are here for the technical side, start with the projects. If you are here for the human side, start with the writing.
+            If you are here for the human side, start with the writing.
         </p>
     </div>
 </section>
@@ -606,7 +372,7 @@
 <section id="contact" class="cta">
     <div class="section-label fade-up">Stay in touch</div>
     <h2 class="fade-up d1">Read, browse, or say hello</h2>
-    <p class="fade-up d2">Start with the magazine, peek at the projects, or send a note.</p>
+    <p class="fade-up d2">Start with the writing, or send a note.</p>
     <div class="cta-links fade-up d3">
         <a href="https://github.com/danielsilvaperez" target="_blank" rel="noopener" class="btn btn-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -624,6 +390,12 @@
     <p>&copy; 2026 Danny Silva. Built with purpose.</p>
 </footer>
 
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6"/>
+    </svg>
+</button>
+
 <script>
 // ── Scroll animations ──
 const observer = new IntersectionObserver((entries) => {
@@ -636,39 +408,36 @@ window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// ── Active nav link ──
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY + 100;
-    sections.forEach(s => {
-        const top = s.offsetTop, h = s.offsetHeight, id = s.getAttribute('id');
-        const link = document.querySelector(`.nav-links a[href="#${id}"]`);
-        if (link) link.classList.toggle('active', scrollY >= top && scrollY < top + h);
-    });
-});
-
 // ── Close mobile menu on link click ──
 document.querySelectorAll('.nav-links a').forEach(a => {
     a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
 });
+
+// ── Back to top ──
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+});
+backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ── Theme toggle ──
+(function() {
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme');
+    if (saved) root.setAttribute('data-theme', saved);
+    document.getElementById('themeToggle')?.addEventListener('click', function() {
+        const current = root.getAttribute('data-theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let next;
+        if (!current) next = systemDark ? 'light' : 'dark';
+        else if (current === 'dark') next = 'light';
+        else next = 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+    });
+})();
 </script>
-    <button class="back-to-top" aria-label="Back to top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    </button>
-    <script>
-        const backToTop = document.querySelector('.back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
 </body>
 </html>
