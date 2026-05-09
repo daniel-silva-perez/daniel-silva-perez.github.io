@@ -313,6 +313,16 @@
                 display: none;
             }
         }
+
+        /* Accessibility: Focus States */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
     </style>
     <link rel="stylesheet" href="magazine.css">
 </head>
