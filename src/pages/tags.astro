@@ -1,5 +1,38 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import { getReadingTime } from '../utils/readingTime';
+import { formatDate } from '../utils/formatDate';
+
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const tagCounts = posts.reduce((acc, post) => {
+	post.data.tags.forEach((tag) => {
+		acc[tag] = (acc[tag] || 0) + 1;
+	});
+	return acc;
+}, {} as Record<string, number>);
+
+const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+
+const maxCount = Math.max(...Object.values(tagCounts), 1);
+const minCount = Math.min(...Object.values(tagCounts), 1);
+
+function getTagSize(count: number): number {
+	if (maxCount === minCount) return 3;
+	const normalized = (count - minCount) / (maxCount - minCount);
+	return Math.round(normalized * 4) + 1;
+}
+
+const postsByTag = posts.reduce((acc, post) => {
+	post.data.tags.forEach((tag) => {
+		if (!acc[tag]) acc[tag] = [];
+		acc[tag].push(post);
+	});
+	return acc;
+}, {} as Record<string, typeof posts>);
 ---
 
 <Layout title="Tags — Danny Silva | Notebook" activeNav="tags">
@@ -14,38 +47,12 @@ import Layout from '../layouts/Layout.astro';
         </section>
 
         <section class="tag-cloud" id="tagCloud">
-            <button class="tag tag-size-5" data-tag="Life">
-                Life
-                <span class="tag-count">8</span>
+            {sortedTags.map(([tag, count]) => (
+            <button class={`tag tag-size-${getTagSize(count)}`} data-tag={tag}>
+                {tag}
+                <span class="tag-count">{count}</span>
             </button>
-            <button class="tag tag-size-4" data-tag="Notes">
-                Notes
-                <span class="tag-count">11</span>
-            </button>
-            <button class="tag tag-size-4" data-tag="Philosophy">
-                Philosophy
-                <span class="tag-count">10</span>
-            </button>
-            <button class="tag tag-size-3" data-tag="Art">
-                Art
-                <span class="tag-count">5</span>
-            </button>
-            <button class="tag tag-size-3" data-tag="Books">
-                Books
-                <span class="tag-count">6</span>
-            </button>
-            <button class="tag tag-size-2" data-tag="Attention">
-                Attention
-                <span class="tag-count">9</span>
-            </button>
-            <button class="tag tag-size-1" data-tag="Health">
-                Health
-                <span class="tag-count">4</span>
-            </button>
-            <button class="tag tag-size-1" data-tag="Tech">
-                Tech
-                <span class="tag-count">4</span>
-            </button>
+            ))}
         </section>
 
         <section class="tagged-posts" id="taggedPosts">
@@ -54,5 +61,20 @@ import Layout from '../layouts/Layout.astro';
         </section>
     </main>
 
+    <script is:inline define:vars={{ postsByTag: Object.fromEntries(
+        Object.entries(postsByTag).map(([tag, tagPosts]) => [
+            tag,
+            tagPosts.map((p) => ({
+                title: p.data.title,
+                category: p.data.category,
+                date: formatDate(p.data.pubDate),
+                image: p.data.heroImage,
+                slug: p.slug,
+                readTime: getReadingTime(p.body),
+            })),
+        ])
+    ) }}>
+        window.__POSTS_BY_TAG__ = postsByTag;
+    </script>
     <script is:inline src="/assets/js/tags.js"></script>
 </Layout>

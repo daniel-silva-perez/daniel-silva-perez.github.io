@@ -1,13 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import { getReadingTime } from '../utils/readingTime';
+import { formatDate } from '../utils/formatDate';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const featuredPost = posts[0];
 const otherPosts = posts.slice(1);
+
+const categoryCounts = posts.reduce((acc, post) => {
+	const cat = post.data.category || 'Uncategorized';
+	acc[cat] = (acc[cat] || 0) + 1;
+	return acc;
+}, {} as Record<string, number>);
 ---
 
 <Layout title="Notebook — Danny Silva" activeNav="blog">
@@ -16,7 +24,7 @@ const otherPosts = posts.slice(1);
     {featuredPost && (
     <section class="blog-hero">
         <a href={`/blog/${featuredPost.slug}`} class="hero-card">
-            <img src={featuredPost.data.heroImage} alt={featuredPost.data.title}>
+            {featuredPost.data.heroImage && <img src={featuredPost.data.heroImage} alt={featuredPost.data.title}>}
             <div class="hero-overlay">
                 <span class="hero-category">Featured</span>
                 <h1 class="hero-title">{featuredPost.data.title}</h1>
@@ -24,9 +32,9 @@ const otherPosts = posts.slice(1);
                 <div class="hero-meta">
                     <span>Danny Silva</span>
                     <span class="dot"></span>
-                    <span>{featuredPost.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                    <span>{formatDate(featuredPost.data.pubDate)}</span>
                     <span class="dot"></span>
-                    <span>8 min read</span>
+                    <span>{getReadingTime(featuredPost.body)}</span>
                 </div>
             </div>
         </a>
@@ -39,39 +47,25 @@ const otherPosts = posts.slice(1);
         </div>
         <div class="categories-scroll">
             <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Life</span>
-                <span class="category-chip-count">8 posts</span>
+                <span class="category-chip-name">All</span>
+                <span class="category-chip-count">{posts.length} posts</span>
             </a>
+            {Object.entries(categoryCounts).map(([cat, count]) => (
             <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Notes</span>
-                <span class="category-chip-count">11 posts</span>
+                <span class="category-chip-name">{cat}</span>
+                <span class="category-chip-count">{count} post{count === 1 ? '' : 's'}</span>
             </a>
-            <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Philosophy</span>
-                <span class="category-chip-count">10 posts</span>
-            </a>
-            <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Art</span>
-                <span class="category-chip-count">5 posts</span>
-            </a>
-            <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Books</span>
-                <span class="category-chip-count">6 posts</span>
-            </a>
-            <a href="/tags" class="category-chip">
-                <span class="category-chip-name">Tech</span>
-                <span class="category-chip-count">4 posts</span>
-            </a>
+            ))}
         </div>
     </section>
 
     <h2 class="section-title">Latest Notes</h2>
 
     <section class="posts-grid">
-        {posts.map((post) => (
+        {otherPosts.map((post) => (
         <article class="post-card" onclick={`location.href='/blog/${post.slug}'`}>
             <div class="post-card-image">
-                <img src={post.data.heroImage} alt={post.data.title}>
+                {post.data.heroImage && <img src={post.data.heroImage} alt={post.data.title}>}
             </div>
             <div class="post-card-content">
                 <span class={`post-card-category ${post.data.category === 'Tech' ? 'tech-label' : ''}`}>{post.data.category}</span>
@@ -83,8 +77,8 @@ const otherPosts = posts.slice(1);
                         <span class="author-name">Danny Silva</span>
                     </div>
                     <div class="post-card-meta">
-                        <span>{post.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
-                        <span class="reading-time">6 min read</span>
+                        <span>{formatDate(post.data.pubDate)}</span>
+                        <span class="reading-time">{getReadingTime(post.body)}</span>
                     </div>
                 </div>
             </div>

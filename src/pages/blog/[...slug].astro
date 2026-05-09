@@ -1,21 +1,33 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { getReadingTime } from '../../utils/readingTime';
+import { formatDate } from '../../utils/formatDate';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
+	return posts
+		.filter((post) => !post.data.draft)
+		.map((post) => ({
+			params: { slug: post.slug },
+			props: post,
+		}));
 }
 type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
-<Layout title={post.data.title} description={post.data.description} activeNav="blog">
+<Layout
+	title={post.data.title}
+	description={post.data.description}
+	activeNav="blog"
+	image={post.data.heroImage}
+	pubDate={post.data.pubDate}
+	updatedDate={post.data.updatedDate}
+	type="article"
+>
     <div class="reading-progress" id="readingProgress"></div>
 
     <article>
@@ -25,25 +37,27 @@ const { Content } = await post.render();
             <div class="post-meta">
                 <span>Danny Silva</span>
                 <span class="divider"></span>
-                <span>{post.data.pubDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+                <span>{formatDate(post.data.pubDate)}</span>
                 <span class="divider"></span>
-                <span>8 min read</span>
+                <span>{getReadingTime(post.body)}</span>
             </div>
         </div>
 
         <div class="post-layout">
             <aside>
+                {headings.length > 0 && (
+                <>
                 <button class="toc-mobile-toggle" id="tocToggle" onclick="toggleToc()">Table of Contents</button>
                 <nav class="toc" id="toc">
                     <div class="toc-title">On this page</div>
                     <ul class="toc-list">
-                        <li><a href="#introduction" class="active">Opening</a></li>
-                        <li><a href="#the-problem-with-speed">The Problem with Speed</a></li>
-                        <li><a href="#embracing-the-slow">Embracing the Slow</a></li>
-                        <li><a href="#practical-steps">Practical Steps</a></li>
-                        <li><a href="#conclusion">Conclusion</a></li>
+                        {headings.filter((h) => h.depth <= 3).map((h) => (
+                        <li><a href={`#${h.slug}`}>{h.text}</a></li>
+                        ))}
                     </ul>
                 </nav>
+                </>
+                )}
             </aside>
 
             <div class="post-content">
