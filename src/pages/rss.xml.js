@@ -4,8 +4,8 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
 	const posts = await getCollection('blog');
 	return rss({
-		title: 'Danny Silva | Personal Notebook',
-		description: "Danny Silva's public notebook for thoughts on philosophy, art, technology, attention, what he is building, and what he is reading.",
+		title: 'Danny Silva | Personal Blog',
+		description: "Danny Silva's personal blog on philosophy, art, technology, attention, what he is building, and what he is reading.",
 		site: context.site,
 		items: posts
 			.filter((post) => !post.data.draft)

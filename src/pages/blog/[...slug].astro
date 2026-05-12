@@ -5,17 +5,26 @@ import { getReadingTime } from '../../utils/readingTime';
 import { formatDate } from '../../utils/formatDate';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts
+	const posts = (await getCollection('blog'))
 		.filter((post) => !post.data.draft)
-		.map((post) => ({
-			params: { slug: post.slug },
-			props: post,
-		}));
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+	return posts.map((post, idx) => ({
+		params: { slug: post.slug },
+		props: {
+			post,
+			// posts are sorted newest→oldest, so newer = idx-1, older = idx+1
+			newer: posts[idx - 1] ?? null,
+			older: posts[idx + 1] ?? null,
+		},
+	}));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = {
+	post: CollectionEntry<'blog'>;
+	newer: CollectionEntry<'blog'> | null;
+	older: CollectionEntry<'blog'> | null;
+};
 
-const post = Astro.props;
+const { post, newer, older } = Astro.props;
 const { Content, headings } = await post.render();
 ---
 
@@ -38,6 +47,12 @@ const { Content, headings } = await post.render();
                 <span>Danny Silva</span>
                 <span class="divider"></span>
                 <span>{formatDate(post.data.pubDate)}</span>
+                {post.data.updatedDate && (
+                  <>
+                    <span class="divider"></span>
+                    <span>Updated {formatDate(post.data.updatedDate)}</span>
+                  </>
+                )}
                 <span class="divider"></span>
                 <span>{getReadingTime(post.body)}</span>
             </div>
@@ -68,10 +83,31 @@ const { Content, headings } = await post.render();
                     <div class="author-bio-avatar">DS</div>
                     <div class="author-bio-content">
                         <div class="author-bio-name">Danny Silva</div>
-                        <div class="author-bio-role">Writer of a public notebook</div>
+                        <div class="author-bio-role">Writer of a personal blog</div>
                         <p class="author-bio-text">I write here to keep track of what is moving through my mind: philosophy, art, attention, technology, books, and the work I am still learning how to do well.</p>
                     </div>
                 </div>
+
+                <p class="reply-link">
+                    Have a thought on this? <a href={`mailto:danielsilvaperez24@gmail.com?subject=${encodeURIComponent('Re: ' + post.data.title)}`}>Reply by email</a>.
+                </p>
+
+                {(newer || older) && (
+                <nav class="post-pager" aria-label="Post navigation">
+                    {older ? (
+                        <a class="pager-link prev" href={`/blog/${older.slug}`} rel="prev">
+                            <span class="pager-label">← Older</span>
+                            <span class="pager-title">{older.data.title}</span>
+                        </a>
+                    ) : <span></span>}
+                    {newer ? (
+                        <a class="pager-link next" href={`/blog/${newer.slug}`} rel="next">
+                            <span class="pager-label">Newer →</span>
+                            <span class="pager-title">{newer.data.title}</span>
+                        </a>
+                    ) : <span></span>}
+                </nav>
+                )}
             </div>
         </div>
     </article>

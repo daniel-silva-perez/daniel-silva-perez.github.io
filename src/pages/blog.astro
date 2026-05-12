@@ -18,7 +18,7 @@ const categoryCounts = posts.reduce((acc, post) => {
 }, {} as Record<string, number>);
 ---
 
-<Layout title="Notebook — Danny Silva" activeNav="blog">
+<Layout title="Blog — Danny Silva" activeNav="blog">
     <div class="scroll-progress" id="scrollProgress"></div>
 
     {featuredPost && (
@@ -43,7 +43,7 @@ const categoryCounts = posts.reduce((acc, post) => {
 
     <section class="categories-section">
         <div class="categories-header">
-            <h2 class="categories-title">Notes from philosophy, art, books, technology, and whatever is occupying my attention</h2>
+            <h2 class="categories-title">Posts on philosophy, art, books, technology, and whatever is occupying my attention</h2>
         </div>
         <div class="categories-scroll">
             <a href="/tags" class="category-chip">
@@ -59,7 +59,7 @@ const categoryCounts = posts.reduce((acc, post) => {
         </div>
     </section>
 
-    <h2 class="section-title">Latest Notes</h2>
+    <h2 class="section-title">Latest Posts</h2>
 
     <section class="posts-grid">
         {otherPosts.map((post) => (

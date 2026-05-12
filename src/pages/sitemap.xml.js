@@ -7,6 +7,7 @@ export async function GET(context) {
 		'/blog',
 		'/archive',
 		'/tags',
+		'/now',
 		'/about',
 	];
 

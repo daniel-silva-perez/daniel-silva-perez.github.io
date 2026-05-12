@@ -1,8 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const recent = (await getCollection('blog'))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 4);
 ---
 
-<Layout title="Page Not Found — Danny Silva | Personal Notebook">
+<Layout title="Page Not Found — Danny Silva | Personal Blog">
     <main class="error-container">
         <div class="error-code">404</div>
         <div class="error-visual">
@@ -14,8 +20,19 @@ import Layout from '../layouts/Layout.astro';
         <h1 class="error-title">Page not found</h1>
         <p class="error-subtitle">That thought is not on the page anymore, or maybe it was never written down.</p>
         <div class="error-actions">
-            <a href="/blog" class="btn-primary">Back to the Notebook</a>
+            <a href="/blog" class="btn-primary">Back to the Blog</a>
             <a href="/" class="btn-secondary">Go Home</a>
         </div>
+
+        {recent.length > 0 && (
+        <section class="error-recent">
+            <h2>Recent posts you might mean</h2>
+            <ul>
+                {recent.map((p) => (
+                    <li><a href={`/blog/${p.slug}`}>{p.data.title}</a></li>
+                ))}
+            </ul>
+        </section>
+        )}
     </main>
 </Layout>

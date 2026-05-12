@@ -1,18 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { formatDate } from '../utils/formatDate';
+import { getReadingTime } from '../utils/readingTime';
+
+const latest = (await getCollection('blog'))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
 ---
 
-<Layout title="Danny Silva | Public Notebook" activeNav="home">
+<Layout title="Danny Silva | Personal Blog" activeNav="home">
     <!-- ── HERO ── -->
     <section class="hero" id="top">
         <div class="hero-content">
-            <div class="hero-label fade-up">Public notebook</div>
+            <div class="hero-label fade-up">Personal blog</div>
             <h1 class="fade-up d1">Fragments from a mind trying to <em>pay attention.</em></h1>
             <p class="hero-desc fade-up d2">
                 A quiet place for what I am thinking through: philosophy, art, technology, books, experiments, attention, and the work of becoming a little less distracted.
             </p>
             <div class="hero-buttons fade-up d3">
-                <a href="/blog" class="btn btn-primary">Enter the Notebook
+                <a href="/blog" class="btn btn-primary">Read the Blog
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg>
                 </a>
                 <a href="/about" class="btn btn-ghost">Why This Exists</a>
@@ -27,11 +35,36 @@ import Layout from '../layouts/Layout.astro';
                 I'm <strong>Danny</strong>. This is where I leave traces of what I am noticing before it hardens into an opinion: ideas from books, small philosophical arguments with myself, art that lingers, tools I am building, and ordinary days that teach something.
             </p>
             <p class="fade-up d3">
-                Technology is part of the notebook because it is part of my life, but it is not the whole point. The real subject is attention: where it goes, what it makes possible, and what it costs.
+                Technology is part of the blog because it is part of my life, but it is not the whole point. The real subject is attention: where it goes, what it makes possible, and what it costs.
             </p>
             <p class="fade-up d4">
                 Read it as a conversation with myself that happens to be public.
             </p>
         </div>
     </section>
+
+    {latest.length > 0 && (
+    <section class="home-latest">
+        <div class="home-latest-header">
+            <h2>Latest posts</h2>
+            <a href="/blog" class="home-latest-more">All posts →</a>
+        </div>
+        <ul class="home-latest-list">
+            {latest.map((post) => (
+                <li class="home-latest-item">
+                    <a href={`/blog/${post.slug}`}>
+                        <span class="home-latest-cat">{post.data.category}</span>
+                        <h3>{post.data.title}</h3>
+                        <p>{post.data.description}</p>
+                        <div class="home-latest-meta">
+                            <span>{formatDate(post.data.pubDate)}</span>
+                            <span>·</span>
+                            <span>{getReadingTime(post.body)}</span>
+                        </div>
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </section>
+    )}
 </Layout>

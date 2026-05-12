@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = "Danny Silva's public notebook for thoughts on philosophy, art, technology, attention, what he is building, and what he is reading.",
+  description = "Danny Silva's personal blog on philosophy, art, technology, attention, what he is building, and what he is reading.",
   image,
   pubDate,
   updatedDate,
@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const siteName = "Danny Silva | Personal Notebook";
+const siteName = "Danny Silva | Personal Blog";
 ---
 
 <meta property="og:title" content={title} />
@@ -41,17 +41,22 @@ const siteName = "Danny Silva | Personal Notebook";
     "@type": "BlogPosting",
     "headline": title,
     "description": description,
-    "url": canonicalURL,
+    "url": canonicalURL.toString(),
+    "mainEntityOfPage": canonicalURL.toString(),
     "datePublished": pubDate.toISOString(),
     "dateModified": (updatedDate || pubDate).toISOString(),
-    "author": {
-      "@type": "Person",
-      "name": "Danny Silva",
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Danny Silva",
-    },
+    "author": { "@type": "Person", "name": "Danny Silva", "url": Astro.site?.toString() },
+    "publisher": { "@type": "Person", "name": "Danny Silva", "url": Astro.site?.toString() },
     ...(image ? { "image": image } : {}),
+  })} />
+)}
+
+{type === 'website' && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Danny Silva",
+    "url": Astro.site?.toString(),
+    "description": "Writer of a personal blog on philosophy, art, technology, books, and attention.",
   })} />
 )}

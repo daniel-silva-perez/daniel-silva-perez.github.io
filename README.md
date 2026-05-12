@@ -1,4 +1,4 @@
-# Danny Silva | Personal Notebook
+# Danny Silva | Personal Blog
 
 A minimalist, content-first personal site covering life, essays, books, travel, and the occasional tech note. 
 

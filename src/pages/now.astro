@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lastUpdated = new Date('2026-05-11');
+const fmt = lastUpdated.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<Layout title="Now — Danny Silva | Personal Blog" activeNav="now" description="What I'm focused on right now.">
+    <main class="now-main">
+        <section class="now-hero">
+            <p class="now-eyebrow">/now</p>
+            <h1 class="now-title">What I am paying attention to, right now.</h1>
+            <p class="now-updated">Last updated <time datetime={lastUpdated.toISOString().slice(0,10)}>{fmt}</time>.</p>
+        </section>
+
+        <section class="now-content">
+            <h2>Reading</h2>
+            <p>A short list of books and essays that are currently shaping how I think. I rotate this when something new takes hold.</p>
+
+            <h2>Building</h2>
+            <p>Small experiments and notes on the tools I am trying to use better. This blog itself counts.</p>
+
+            <h2>Practicing</h2>
+            <p>Writing daily, walking before screens, and trying to keep my attention longer than the average modern interruption.</p>
+
+            <p class="now-footnote">
+                Inspired by <a href="https://nownownow.com/about" rel="noopener noreferrer">Derek Sivers' /now page movement</a>.
+            </p>
+        </section>
+    </main>
+</Layout>
