@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
 import { getReadingTime } from '../../utils/readingTime';
 import { formatDate } from '../../utils/formatDate';
 
@@ -8,23 +9,37 @@ export async function getStaticPaths() {
 	const posts = (await getCollection('blog'))
 		.filter((post) => !post.data.draft)
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-	return posts.map((post, idx) => ({
-		params: { slug: post.slug },
-		props: {
-			post,
-			// posts are sorted newest→oldest, so newer = idx-1, older = idx+1
-			newer: posts[idx - 1] ?? null,
-			older: posts[idx + 1] ?? null,
-		},
-	}));
+	return posts.map((post, idx) => {
+		const related = posts
+			.filter((p) => p.slug !== post.slug)
+			.map((p) => {
+				const sharedTags = p.data.tags.filter((t) => post.data.tags.includes(t)).length;
+				const sameCat = p.data.category && p.data.category === post.data.category ? 1 : 0;
+				return { post: p, score: sharedTags * 2 + sameCat };
+			})
+			.filter((r) => r.score > 0)
+			.sort((a, b) => b.score - a.score || b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf())
+			.slice(0, 3)
+			.map((r) => r.post);
+		return {
+			params: { slug: post.slug },
+			props: {
+				post,
+				newer: posts[idx - 1] ?? null,
+				older: posts[idx + 1] ?? null,
+				related,
+			},
+		};
+	});
 }
 type Props = {
 	post: CollectionEntry<'blog'>;
 	newer: CollectionEntry<'blog'> | null;
 	older: CollectionEntry<'blog'> | null;
+	related: CollectionEntry<'blog'>[];
 };
 
-const { post, newer, older } = Astro.props;
+const { post, newer, older, related } = Astro.props;
 const { Content, headings } = await post.render();
 ---
 
@@ -55,6 +70,14 @@ const { Content, headings } = await post.render();
                 )}
                 <span class="divider"></span>
                 <span>{getReadingTime(post.body)}</span>
+                <span class="divider"></span>
+                <button id="ttsToggle" class="tts-control" data-state="idle" type="button" aria-label="Read aloud" aria-pressed="false">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                    <span class="tts-label">Listen</span>
+                </button>
+                <button id="ttsStop" class="tts-control tts-stop" type="button" aria-label="Stop reading" hidden>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>
+                </button>
             </div>
         </div>
 
@@ -91,6 +114,15 @@ const { Content, headings } = await post.render();
                 <p class="reply-link">
                     Have a thought on this? <a href={`mailto:danielsilvaperez24@gmail.com?subject=${encodeURIComponent('Re: ' + post.data.title)}`}>Reply by email</a>.
                 </p>
+
+                {related.length > 0 && (
+                <section class="related-posts">
+                    <h2 class="related-posts-title">Related posts</h2>
+                    <div class="posts-grid">
+                        {related.map((p) => <PostCard post={p} />)}
+                    </div>
+                </section>
+                )}
 
                 {(newer || older) && (
                 <nav class="post-pager" aria-label="Post navigation">

@@ -1,0 +1,37 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => !p.data.draft);
+  const catMap = new Map<string, CollectionEntry<'blog'>[]>();
+  for (const post of posts) {
+    const cat = post.data.category || 'Uncategorized';
+    if (!catMap.has(cat)) catMap.set(cat, []);
+    catMap.get(cat)!.push(post);
+  }
+  return Array.from(catMap.entries()).map(([category, catPosts]) => ({
+    params: { category },
+    props: {
+      category,
+      posts: catPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+type Props = { category: string; posts: CollectionEntry<'blog'>[] };
+const { category, posts } = Astro.props;
+---
+<Layout title={`${category} — Danny Silva | Blog`} activeNav="blog">
+  <main>
+    <section class="tags-hero">
+      <p class="tags-subtitle"><a href="/blog">← All posts</a></p>
+      <h1 class="tags-title">{category}</h1>
+      <p class="tags-subtitle">{posts.length} post{posts.length === 1 ? '' : 's'}</p>
+    </section>
+    <section class="posts-grid">
+      {posts.map((post) => <PostCard post={post} />)}
+    </section>
+  </main>
+</Layout>

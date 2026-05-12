@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../utils/formatDate';
+import { getReadingTime } from '../utils/readingTime';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props;
+---
+<article class="post-card" onclick={`location.href='/blog/${post.slug}'`}>
+  <div class="post-card-image">
+    {post.data.heroImage && <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async">}
+  </div>
+  <div class="post-card-content">
+    {post.data.category && (
+      <span class={`post-card-category ${post.data.category === 'Tech' ? 'tech-label' : ''}`}>{post.data.category}</span>
+    )}
+    <h3 class="post-card-title">{post.data.title}</h3>
+    <p class="post-card-excerpt">{post.data.description}</p>
+    <div class="post-card-footer">
+      <div class="post-card-author">
+        <div class="author-avatar">DS</div>
+        <span class="author-name">Danny Silva</span>
+      </div>
+      <div class="post-card-meta">
+        <span>{formatDate(post.data.pubDate)}</span>
+        <span class="reading-time">{getReadingTime(post.body)}</span>
+      </div>
+    </div>
+  </div>
+</article>

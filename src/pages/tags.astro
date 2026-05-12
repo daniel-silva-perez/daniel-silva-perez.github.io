@@ -48,10 +48,10 @@ const postsByTag = posts.reduce((acc, post) => {
 
         <section class="tag-cloud" id="tagCloud">
             {sortedTags.map(([tag, count]) => (
-            <button class={`tag tag-size-${getTagSize(count)}`} data-tag={tag}>
+            <a href={`/tags/${tag}`} class={`tag tag-size-${getTagSize(count)}`} data-tag={tag}>
                 {tag}
                 <span class="tag-count">{count}</span>
-            </button>
+            </a>
             ))}
         </section>
 

@@ -890,3 +890,24 @@ footer{ text-align:center;padding:4rem 2rem; border-top:1px solid var(--border);
 .error-recent ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .error-recent a { color: var(--accent); text-decoration: none; }
 .error-recent a:hover { text-decoration: underline; }
+
+/* ── tag anchor + related posts ── */
+a.tag { text-decoration: none; color: inherit; }
+a.tag:hover { color: var(--accent); }
+.related-posts { margin: 72px 0 32px; }
+.related-posts-title { font-family: var(--heading-font); font-weight: var(--heading-weight); font-size: 1.3rem; margin-bottom: 20px; letter-spacing: var(--heading-tracking); }
+
+/* ── Text-to-Speech control ── */
+.tts-control {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-muted); cursor: pointer;
+    padding: 3px 10px; border-radius: 999px;
+    font: inherit; font-size: 0.82rem; line-height: 1;
+    transition: color 0.2s var(--transition), border-color 0.2s var(--transition), background 0.2s var(--transition);
+}
+.tts-control:hover { color: var(--accent); border-color: var(--accent); }
+.tts-control[data-state="playing"] { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.tts-control[data-state="paused"] { color: var(--accent); border-color: var(--accent); }
+.tts-stop { padding: 3px 8px; }
+.tts-stop svg { display: block; }

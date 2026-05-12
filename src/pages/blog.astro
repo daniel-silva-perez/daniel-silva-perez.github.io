@@ -51,7 +51,7 @@ const categoryCounts = posts.reduce((acc, post) => {
                 <span class="category-chip-count">{posts.length} posts</span>
             </a>
             {Object.entries(categoryCounts).map(([cat, count]) => (
-            <a href="/tags" class="category-chip">
+            <a href={`/category/${cat}`} class="category-chip">
                 <span class="category-chip-name">{cat}</span>
                 <span class="category-chip-count">{count} post{count === 1 ? '' : 's'}</span>
             </a>

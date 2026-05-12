@@ -19,6 +19,9 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteName = "Danny Silva | Personal Blog";
+const resolvedImage = image
+  ? (image.startsWith('http') ? image : new URL(image, Astro.site).toString())
+  : new URL('/og-default.svg', Astro.site).toString();
 ---
 
 <meta property="og:title" content={title} />
@@ -26,12 +29,12 @@ const siteName = "Danny Silva | Personal Blog";
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content={siteName} />
 <meta property="og:type" content={type} />
-{image && <meta property="og:image" content={image} />}
+<meta property="og:image" content={resolvedImage} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-{image && <meta name="twitter:image" content={image} />}
+<meta name="twitter:image" content={resolvedImage} />
 
 <link rel="canonical" href={canonicalURL} />
 
@@ -47,7 +50,7 @@ const siteName = "Danny Silva | Personal Blog";
     "dateModified": (updatedDate || pubDate).toISOString(),
     "author": { "@type": "Person", "name": "Danny Silva", "url": Astro.site?.toString() },
     "publisher": { "@type": "Person", "name": "Danny Silva", "url": Astro.site?.toString() },
-    ...(image ? { "image": image } : {}),
+    "image": resolvedImage,
   })} />
 )}
 
