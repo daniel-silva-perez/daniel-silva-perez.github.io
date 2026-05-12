@@ -23,7 +23,7 @@ const categoryCounts = posts.reduce((acc, post) => {
 
     {featuredPost && (
     <section class="blog-hero">
-        <a href={`/blog/${featuredPost.slug}`} class="hero-card">
+        <a href={`/blog/${featuredPost.id}`} class="hero-card">
             {featuredPost.data.heroImage && <img src={featuredPost.data.heroImage} alt={featuredPost.data.title} decoding="async" fetchpriority="high">}
             <div class="hero-overlay">
                 <span class="hero-category">Featured</span>
@@ -63,7 +63,7 @@ const categoryCounts = posts.reduce((acc, post) => {
 
     <section class="posts-grid">
         {otherPosts.map((post) => (
-        <article class="post-card" onclick={`location.href='/blog/${post.slug}'`}>
+        <article class="post-card" onclick={`location.href='/blog/${post.id}'`}>
             <div class="post-card-image">
                 {post.data.heroImage && <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async">}
             </div>

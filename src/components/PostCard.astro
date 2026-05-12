@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
 import { formatDate } from '../utils/formatDate';
 import { getReadingTime } from '../utils/readingTime';
 
@@ -8,9 +9,19 @@ interface Props {
 }
 const { post } = Astro.props;
 ---
-<article class="post-card" onclick={`location.href='/blog/${post.slug}'`}>
+<article class="post-card" onclick={`location.href='/blog/${post.id}'`}>
   <div class="post-card-image">
-    {post.data.heroImage && <img src={post.data.heroImage} alt={post.data.title} loading="lazy" decoding="async">}
+    {post.data.heroImage && (
+      <Image
+        src={post.data.heroImage}
+        alt={post.data.title}
+        inferSize
+        widths={[400, 800, 1200]}
+        sizes="(max-width: 700px) 100vw, 400px"
+        loading="lazy"
+        decoding="async"
+      />
+    )}
   </div>
   <div class="post-card-content">
     {post.data.category && (

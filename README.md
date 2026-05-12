@@ -8,7 +8,7 @@ Live at [danielsilvaperez.github.io](https://danielsilvaperez.github.io)
 
 ## Technical Stack
 
-- **Framework**: [Astro](https://astro.build/) (v4+)
+- **Framework**: [Astro](https://astro.build/) (v6+)
 - **Styling**: Vanilla CSS with custom properties for theme management.
 - **Content**: Markdown-driven via Astro Content Collections.
 - **Deployment**: Automatic via GitHub Actions to GitHub Pages.
@@ -18,7 +18,7 @@ Live at [danielsilvaperez.github.io](https://danielsilvaperez.github.io)
 | Path | Purpose |
 |------|---------|
 | `src/pages/` | Site routes (`index.astro`, `blog.astro`, etc.) |
-| `src/layouts/` | Shared UI wrappers (Header, Footer, Head) |
+| `src/layouts/` | Shared page layout (head, nav, footer in `Layout.astro`) |
 | `src/content/blog/` | Your writing! Drop `.md` files here to publish. |
 | `public/assets/` | Static files (Images, global JS, CSS) |
 

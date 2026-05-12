@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Search — Danny Silva" activeNav="search">
+    <div class="search-page">
+        <h1 class="search-title">Search</h1>
+        <p class="search-description">Find posts across the notebook.</p>
+        <div id="search" class="pagefind-search"></div>
+    </div>
+</Layout>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+
+<script is:inline>
+    window.addEventListener('DOMContentLoaded', function () {
+        new PagefindUI({ element: '#search', showSubResults: true });
+    });
+</script>
+
+<style>
+.search-page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+.search-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+.search-description {
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+}
+.pagefind-search {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: var(--color-accent);
+    --pagefind-ui-text: var(--color-text);
+    --pagefind-ui-background: var(--color-surface);
+    --pagefind-ui-border: var(--color-border);
+    --pagefind-ui-tag: var(--color-surface-raised);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: var(--font-sans);
+}
+</style>

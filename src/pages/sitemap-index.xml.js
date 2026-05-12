@@ -22,7 +22,7 @@ export async function GET(context) {
 		...posts
 			.filter((post) => !post.data.draft)
 			.map((post) => ({
-				url: new URL(`/blog/${post.slug}`, context.site).href,
+				url: new URL(`/blog/${post.id}`, context.site).href,
 				lastmod: (post.data.updatedDate || post.data.pubDate).toISOString(),
 				changefreq: 'monthly',
 				priority: '0.7',

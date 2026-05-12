@@ -3,6 +3,7 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  slug?: string;
   pubDate?: Date;
   updatedDate?: Date;
   type?: 'website' | 'article';
@@ -12,6 +13,7 @@ const {
   title,
   description = "Danny Silva's personal blog on philosophy, art, technology, attention, what he is building, and what he is reading.",
   image,
+  slug,
   pubDate,
   updatedDate,
   type = 'website',
@@ -21,7 +23,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteName = "Danny Silva | Personal Blog";
 const resolvedImage = image
   ? (image.startsWith('http') ? image : new URL(image, Astro.site).toString())
-  : new URL('/og-default.svg', Astro.site).toString();
+  : slug
+    ? new URL(`/og/${slug}.png`, Astro.site).toString()
+    : new URL('/og-default.svg', Astro.site).toString();
 ---
 
 <meta property="og:title" content={title} />

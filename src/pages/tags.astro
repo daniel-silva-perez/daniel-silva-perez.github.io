@@ -69,8 +69,8 @@ const postsByTag = posts.reduce((acc, post) => {
                 category: p.data.category,
                 date: formatDate(p.data.pubDate),
                 image: p.data.heroImage,
-                slug: p.slug,
-                readTime: getReadingTime(p.body),
+                slug: p.id,
+                readTime: getReadingTime(p.body ?? ''),
             })),
         ])
     ) }}>

@@ -1,6 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import '@fontsource-variable/lora/index.css';
 import '@fontsource-variable/lora/wght-italic.css';
 import '@fontsource-variable/inter/index.css';
@@ -10,12 +10,13 @@ interface Props {
   description?: string;
   activeNav?: string;
   image?: string;
+  slug?: string;
   pubDate?: Date;
   updatedDate?: Date;
   type?: 'website' | 'article';
 }
 
-const { title, description = "Danny Silva's personal blog on philosophy, art, technology, attention, what he is building, and what he is reading.", activeNav, image, pubDate, updatedDate, type } = Astro.props;
+const { title, description = "Danny Silva's personal blog on philosophy, art, technology, attention, what he is building, and what he is reading.", activeNav, image, slug, pubDate, updatedDate, type } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -25,12 +26,12 @@ const { title, description = "Danny Silva's personal blog on philosophy, art, te
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <meta name="description" content={description}>
-    <SEO title={title} description={description} image={image} pubDate={pubDate} updatedDate={updatedDate} type={type} />
+    <SEO title={title} description={description} image={image} slug={slug} pubDate={pubDate} updatedDate={updatedDate} type={type} />
     <link rel="alternate" type="application/rss+xml" title="Danny Silva | Personal Blog" href="/rss.xml" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script is:inline src="/assets/js/theme.js"></script>
     <link rel="stylesheet" href="/assets/css/style.css">
-    <ViewTransitions />
+    <ClientRouter />
 </head>
 <body>
     <nav>
@@ -43,6 +44,7 @@ const { title, description = "Danny Silva's personal blog on philosophy, art, te
             <li><a href="/tags" class={activeNav === 'tags' ? 'active' : ''}>Tags</a></li>
             <li><a href="/now" class={activeNav === 'now' ? 'active' : ''}>Now</a></li>
             <li><a href="/about" class={activeNav === 'about' ? 'active' : ''}>About</a></li>
+            <li><a href="/search" class={activeNav === 'search' ? 'active' : ''}>Search</a></li>
             <li class="nav-controls">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
                     <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -67,7 +69,7 @@ const { title, description = "Danny Silva's personal blog on philosophy, art, te
             <a href="/">Home</a>
             <a href="/rss.xml">RSS</a>
         </div>
-        <p class="footer-copyright">&copy; 2026 Danny Silva. Notes from a mind in progress.</p>
+        <p class="footer-copyright">&copy; {new Date().getFullYear()} Danny Silva. Notes from a mind in progress.</p>
     </footer>
 
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
